@@ -13,12 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-public class ClientLoginWindow extends JFrame{
-    ClientLoginWindow() {
-        this.setSize(500, 500);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Client Login");
-        this.setVisible(true);
+public class SignupClient extends JFrame{
+    SignupClient(){
+        setTitle("Signup as a Client");
+        setSize(800, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
 
         // Name
         JPanel namePanel = new JPanel();
@@ -64,7 +64,7 @@ public class ClientLoginWindow extends JFrame{
         websitePanel.add(websiteField);
         // Login Button
         JPanel loginButtonPanel = new JPanel();
-        final JButton loginButton = new JButton("Login");
+        final JButton loginButton = new JButton("Signup");
         loginButtonPanel.add(loginButton);
 
         loginButton.addActionListener(new ActionListener() {
@@ -77,33 +77,17 @@ public class ClientLoginWindow extends JFrame{
                 new HomeWindowIsLoginClient();
             }
         });
-
-        // Signup Button
-        JPanel signupButtonPanel = new JPanel();
-        final JButton signupButton = new JButton("Signup Instead");
-        signupButtonPanel.add(signupButton);
-        signupButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Window window = SwingUtilities.getWindowAncestor(signupButton);
-                if (window != null) {
-                    window.dispose();
-                }
-                new SignupClient();
-            }
-        });
         
         // Main Panel
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(7, 1));
-        // mainPanel.add(namePanel);
+        mainPanel.add(namePanel);
         mainPanel.add(userNamePanel);
         mainPanel.add(passwordPanel);
-        // mainPanel.add(emailPanel);
-        // mainPanel.add(descriptionPanel);
-        // mainPanel.add(websitePanel);
+        mainPanel.add(emailPanel);
+        mainPanel.add(descriptionPanel);
+        mainPanel.add(websitePanel);
         mainPanel.add(loginButtonPanel);
-        mainPanel.add(signupButtonPanel);
 
         add(mainPanel, BorderLayout.CENTER);
     }
