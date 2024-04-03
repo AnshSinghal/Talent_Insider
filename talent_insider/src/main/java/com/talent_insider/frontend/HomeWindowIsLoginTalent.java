@@ -1,3 +1,5 @@
+package com.talent_insider.frontend;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -18,14 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class HomeWindowIsLoginClient extends JFrame{
-    HomeWindowIsLoginClient(){
+public class HomeWindowIsLoginTalent extends JFrame {
+    HomeWindowIsLoginTalent() {
         this.setVisible(true);
         this.setTitle("Talent Insider");
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        ImageIcon imageIcon = new ImageIcon("frontend/talent.png");
+        ImageIcon imageIcon = new ImageIcon("talent_insider/src/main/java/com/talent_insider/frontend/talent.png");
         Image image = imageIcon.getImage();
         Image newImage = image.getScaledInstance(800, 300, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newImage);
@@ -37,8 +39,8 @@ public class HomeWindowIsLoginClient extends JFrame{
         JButton postReq = new JButton("Post a Requirement");
         // JButton talentLogin = new JButton("Login as a Talent");
         // JButton clientLogin = new JButton("Login as a Client");
-        JButton profile = new JButton("Profile");
-        navbar.add(postReq);
+        final JButton profile = new JButton("Profile");
+        // navbar.add(postReq);
         // navbar.add(talentLogin);
         // navbar.add(clientLogin);
         navbar.add(profile);
@@ -48,7 +50,7 @@ public class HomeWindowIsLoginClient extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 // Window window = SwingUtilities.getWindowAncestor(postReq);
                 // if (window != null) {
-                //     window.dispose();
+                // window.dispose();
                 // }
                 new NewReq();
             }
@@ -57,35 +59,17 @@ public class HomeWindowIsLoginClient extends JFrame{
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Window window = SwingUtilities.getWindowAncestor(profile);
+                Window window = SwingUtilities.getWindowAncestor(profile);
                 // if (window != null) {
-                //     window.dispose();
+                // window.dispose();
                 // }
-                new ClientProfileWindow();
+                if (false){
+                    new CreateProfileTalent();
+                } else{
+                    new TalentProfileWindow((JFrame) window);
+                }
             }
         });
-
-        // talentLogin.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         Window window = SwingUtilities.getWindowAncestor(talentLogin);
-        //         if (window != null) {
-        //             window.dispose();
-        //         }
-        //         new TalentLoginWindow();
-        //     }
-        // });
-
-        // clientLogin.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         Window window = SwingUtilities.getWindowAncestor(clientLogin);
-        //         if (window != null) {
-        //             window.dispose();
-        //         }
-        //         new ClientLoginWindow();
-        //     }
-        // });
 
         // hero panel
         JLabel labelH1 = new JLabel("Talent Insider");

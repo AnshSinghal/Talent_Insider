@@ -1,3 +1,5 @@
+package com.talent_insider.frontend;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -69,7 +71,7 @@ public class NewReq extends JFrame {
         textField5.setColumns(20);
         contentPanel.add(textField5);
 
-        JButton submitButton = new JButton("Submit");
+        final JButton submitButton = new JButton("Submit");
 
         submitButton.addActionListener(new ActionListener() {
             @Override

@@ -1,3 +1,5 @@
+package com.talent_insider.frontend;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Window;
@@ -55,18 +57,18 @@ public class TalentLoginWindow extends JFrame {
         numberPanel.add(numberField);
         // Login Button
         JPanel loginButtonPanel = new JPanel();
-        JButton loginButton = new JButton("Login");
+        final JButton loginButton = new JButton("Login");
         loginButtonPanel.add(loginButton);
 
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Login Button Clicked");
-                System.out.println("Name: " + nameField.getText());
-                System.out.println("User Name: " + userNameField.getText());
-                System.out.println("Password: " + passwordField.getText());
-                System.out.println("Email: " + emailField.getText());
-                System.out.println("Phone Number: " + numberField.getText());
+                // System.out.println("Name: " + nameField.getText());
+                // System.out.println("User Name: " + userNameField.getText());
+                // System.out.println("Password: " + passwordField.getText());
+                // System.out.println("Email: " + emailField.getText());
+                // System.out.println("Phone Number: " + numberField.getText());
                 Window window = SwingUtilities.getWindowAncestor(loginButton);
                 if (window != null) {
                     window.dispose();

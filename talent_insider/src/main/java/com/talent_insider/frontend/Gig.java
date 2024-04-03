@@ -1,3 +1,5 @@
+package com.talent_insider.frontend;
+
 public class Gig {
     private String jobTitle;
     private String description;

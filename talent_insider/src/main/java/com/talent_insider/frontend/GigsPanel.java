@@ -1,3 +1,5 @@
+package com.talent_insider.frontend;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -7,6 +9,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -31,8 +35,11 @@ public class GigsPanel extends JPanel {
 
     private void addButton() {
         JButton button = new JButton("View More");
-        button.addActionListener(e ->{
-            new GigWindow(gig);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new GigWindow(gig);
+            }
         });
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = 5;

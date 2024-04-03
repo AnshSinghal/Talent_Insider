@@ -1,3 +1,5 @@
+package com.talent_insider.frontend;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -18,14 +20,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class HomeWindowIsLoginTalent extends JFrame {
-    HomeWindowIsLoginTalent() {
-        this.setVisible(true);
-        this.setTitle("Talent Insider");
-        this.setSize(500, 500);
-        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+public class Main {
 
-        ImageIcon imageIcon = new ImageIcon("frontend/talent.png");
+    public static void main(String[] args) {
+
+        ImageIcon imageIcon = new ImageIcon("talent_insider/src/main/java/com/talent_insider/frontend/talent.png");
         Image image = imageIcon.getImage();
         Image newImage = image.getScaledInstance(800, 300, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newImage);
@@ -34,34 +33,43 @@ public class HomeWindowIsLoginTalent extends JFrame {
         JPanel navbar = new JPanel();
         navbar.setBackground(Color.GRAY);
         navbar.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        JButton postReq = new JButton("Post a Requirement");
-        // JButton talentLogin = new JButton("Login as a Talent");
-        // JButton clientLogin = new JButton("Login as a Client");
-        JButton profile = new JButton("Profile");
+        final JButton postReq = new JButton("Post a Requirement");
+        final JButton talentLogin = new JButton("Login as a Talent");
+        final JButton clientLogin = new JButton("Login as a Client");
         // navbar.add(postReq);
-        // navbar.add(talentLogin);
-        // navbar.add(clientLogin);
-        navbar.add(profile);
+        navbar.add(talentLogin);
+        navbar.add(clientLogin);
 
         postReq.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Window window = SwingUtilities.getWindowAncestor(postReq);
-                // if (window != null) {
-                // window.dispose();
-                // }
+                Window window = SwingUtilities.getWindowAncestor(postReq);
+                if (window != null) {
+                    window.dispose();
+                }
                 new NewReq();
             }
         });
 
-        profile.addActionListener(new ActionListener() {
+        talentLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Window window = SwingUtilities.getWindowAncestor(profile);
-                // if (window != null) {
-                // window.dispose();
-                // }
-                new TalentProfileWindow();
+                Window window = SwingUtilities.getWindowAncestor(talentLogin);
+                if (window != null) {
+                    window.dispose();
+                }
+                new TalentLoginWindow();
+            }
+        });
+
+        clientLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Window window = SwingUtilities.getWindowAncestor(clientLogin);
+                if (window != null) {
+                    window.dispose();
+                }
+                new ClientLoginWindow();
             }
         });
 
@@ -99,12 +107,18 @@ public class HomeWindowIsLoginTalent extends JFrame {
         for (GigsPanel panel : gigPanels) {
             gigsContainer.add(panel);
         }
-        // Main Panel
+
+        // Main layout
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(navbar, BorderLayout.NORTH);
         mainPanel.add(heroPanel, BorderLayout.CENTER);
         mainPanel.add(gigsContainer, BorderLayout.SOUTH);
-        this.add(mainPanel);
+
+        JFrame frame = new JFrame("Talent Insider");
+        frame.setVisible(true);
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame.add(mainPanel);
     }
 }

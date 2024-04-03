@@ -1,3 +1,5 @@
+package com.talent_insider.frontend;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Window;
@@ -62,7 +64,7 @@ public class ClientLoginWindow extends JFrame{
         websitePanel.add(websiteField);
         // Login Button
         JPanel loginButtonPanel = new JPanel();
-        JButton loginButton = new JButton("Login");
+        final JButton loginButton = new JButton("Login");
         loginButtonPanel.add(loginButton);
 
         loginButton.addActionListener(new ActionListener() {

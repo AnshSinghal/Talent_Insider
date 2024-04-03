@@ -1,3 +1,5 @@
+package com.talent_insider.frontend;
+
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Window;
@@ -63,7 +65,7 @@ public class GigWindow extends JFrame {
         applyButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         // Apply Button
-        JButton applyButton = new JButton("Apply");
+        final JButton applyButton = new JButton("Apply");
         applyButtonPanel.add(applyButton);
 
         applyButton.addActionListener(new ActionListener() {
