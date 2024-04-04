@@ -10,7 +10,7 @@ public class DatabaseConnection {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "Ansh@123";
 
-    private DatabaseConnection() {
+    public DatabaseConnection() {
         super();
         // This constructor is intentionally left empty
     }

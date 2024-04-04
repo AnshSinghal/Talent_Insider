@@ -15,9 +15,26 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class SignupTalent extends JFrame {
-    SignupTalent() {
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.PreparedStatement;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class SignupTalent extends JFrame{
+    SignupTalent(){
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Talent Login");
@@ -67,14 +84,6 @@ public class SignupTalent extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Login Button Clicked");
-                // System.out.println("Name: " + nameField.getText());
-                // System.out.println("User Name: " + userNameField.getText());
-                // System.out.println("Password: " + passwordField.getText());
-                // System.out.println("Email: " + emailField.getText());
-                // System.out.println("Phone Number: " + numberField.getText());
-
-                // Testing
-
                 try {
                     // 1. Prepare the URL
                     String endpoint = "http://localhost:8080/talent_insider-1.0-SNAPSHOT/signup?name=test1&username=test2&password=test3&email=test4&number=12123234";
@@ -109,6 +118,16 @@ public class SignupTalent extends JFrame {
                     // Handle exceptions (e.g., network errors)
                     ex.printStackTrace();
                 }
+
+
+                
+                // System.out.println("Name: " + nameField.getText());
+                // System.out.println("User Name: " + userNameField.getText());
+                // System.out.println("Password: " + passwordField.getText());
+                // System.out.println("Email: " + emailField.getText());
+                // System.out.println("Phone Number: " + numberField.getText());
+                
+                
 
                 Window window = SwingUtilities.getWindowAncestor(loginButton);
                 if (window != null) {
