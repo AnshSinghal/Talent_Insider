@@ -86,7 +86,7 @@ public class SignupTalent extends JFrame{
                 System.out.println("Login Button Clicked");
                 try {
                     // 1. Prepare the URL
-                    String endpoint = "http://localhost:8080/talent_insider-1.0-SNAPSHOT/signup?name=test1&username=test2&password=test3&email=test4&number=12123234";
+                    String endpoint = "http://localhost:8080/ansh_singhal/signup?name="+ nameField.getText() +"&username="+ userNameField.getText() +"&password="+ passwordField.getText() +"&email=ansh.tech"+ emailField.getText() +"&number=" + numberField.getText();
                     URL url = new URL(endpoint);
 
                     // 2. Open the connection
