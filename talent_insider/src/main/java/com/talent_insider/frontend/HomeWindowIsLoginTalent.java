@@ -56,6 +56,20 @@ public class HomeWindowIsLoginTalent extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                
+
+                // Window window = SwingUtilities.getWindowAncestor(postReq);
+                // if (window != null) {
+                // window.dispose();
+                // }
+                new NewReq();
+            }
+        });
+
+        profile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
                 try {
                     // 1. Prepare the URL
                     String endpoint = "https://api.example.com/data";
@@ -91,17 +105,6 @@ public class HomeWindowIsLoginTalent extends JFrame {
                     ex.printStackTrace();
                 }
 
-                // Window window = SwingUtilities.getWindowAncestor(postReq);
-                // if (window != null) {
-                // window.dispose();
-                // }
-                new NewReq();
-            }
-        });
-
-        profile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
                 Window window = SwingUtilities.getWindowAncestor(profile);
                 // if (window != null) {
                 // window.dispose();
