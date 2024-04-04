@@ -56,8 +56,6 @@ public class HomeWindowIsLoginTalent extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                
-
                 // Window window = SwingUtilities.getWindowAncestor(postReq);
                 // if (window != null) {
                 // window.dispose();
@@ -72,7 +70,7 @@ public class HomeWindowIsLoginTalent extends JFrame {
 
                 try {
                     // 1. Prepare the URL
-                    String endpoint = "https://api.example.com/data";
+                    String endpoint = "http://localhost:8080/ansh_singhal/userProfile?name=Anshss&age=&bio=&skills=&experience=";
                     URL url = new URL(endpoint);
 
                     // 2. Open the connection
@@ -109,9 +107,9 @@ public class HomeWindowIsLoginTalent extends JFrame {
                 // if (window != null) {
                 // window.dispose();
                 // }
-                if (false){
+                if (false) {
                     new CreateProfileTalent();
-                } else{
+                } else {
                     new TalentProfileWindow((JFrame) window);
                 }
             }
