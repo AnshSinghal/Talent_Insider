@@ -5,6 +5,9 @@ import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,8 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-public class SignupTalent extends JFrame{
-    SignupTalent(){
+public class SignupTalent extends JFrame {
+    SignupTalent() {
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Talent Login");
@@ -69,6 +72,44 @@ public class SignupTalent extends JFrame{
                 // System.out.println("Password: " + passwordField.getText());
                 // System.out.println("Email: " + emailField.getText());
                 // System.out.println("Phone Number: " + numberField.getText());
+
+                // Testing
+
+                try {
+                    // 1. Prepare the URL
+                    String endpoint = "http://localhost:8080/talent_insider-1.0-SNAPSHOT/signup?name=test1&username=test2&password=test3&email=test4&number=12123234";
+                    URL url = new URL(endpoint);
+
+                    // 2. Open the connection
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("POST");
+                    connection.setDoOutput(true); // Enable sending a request body
+
+                    // 3. Set headers (if needed)
+                    connection.setRequestProperty("Content-Type", "application/json");
+
+                    // 4. Prepare the request body (if needed)
+                    String postData = "{ \"key1\": \"value1\", \"key2\": \"value2\" }"; // Example JSON
+                    try (OutputStream os = connection.getOutputStream()) {
+                        os.write(postData.getBytes());
+                    }
+
+                    // 5. Get the response code
+                    int responseCode = connection.getResponseCode();
+                    System.out.println("Response Code: " + responseCode);
+
+                    // 6. Process the response (if needed)
+                    if (responseCode == 200 || responseCode == 201) { // Success codes
+                        // Read response using InputStream from connection
+                    } else {
+                        // Handle error
+                    }
+
+                } catch (Exception ex) {
+                    // Handle exceptions (e.g., network errors)
+                    ex.printStackTrace();
+                }
+
                 Window window = SwingUtilities.getWindowAncestor(loginButton);
                 if (window != null) {
                     window.dispose();
@@ -89,5 +130,5 @@ public class SignupTalent extends JFrame{
 
         add(mainPanel, BorderLayout.CENTER);
     }
-        
+
 }
