@@ -3,63 +3,89 @@ package com.talent_insider;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
+import org.json.JSONObject;
+import org.json.JSONArray; 
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet("/job") // Adjust URL as needed
+@WebServlet("/job") // Adjust the URL pattern if needed
 public class jobServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Retrieve user input parameters
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String skills = request.getParameter("skills");
-        String salary = request.getParameter("salary");
-        String deadline = request.getParameter("deadline");
-
+        response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        // Get company username from session
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("companyUsername") == null) {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "You must be logged in as a company.");
-            return;
-        }
-        String companyUsername = (String) session.getAttribute("companyUsername");
+        String title = request.getParameter("title");
+        String desc = request.getParameter("desc");
+        String salary = request.getParameter("salary");
+        String skills = request.getParameter("skills");
+        String deadline = request.getParameter("deadline");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/talent_insider", "root", "Ansh@123");
 
-            // Insert talent requirement data into the database
-            String sql = "INSERT INTO job (title, description, skills, salary, deadline, company_username) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO job (title, desc, salary, skills, deadline) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, title);
-            statement.setString(2, description);
-            statement.setString(3, skills);
-            statement.setInt(4, Integer.parseInt(salary));
-            statement.setDate(5, new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(deadline).getTime()));
-            statement.setString(6, companyUsername); 
+            statement.setString(2, desc);
+            statement.setString(3, salary);
+            statement.setString(4, skills);
+            statement.setString(5, deadline); 
 
             int rowsInserted = statement.executeUpdate();
+
             if (rowsInserted > 0) {
-                out.println("Talent requirement added successfully!");
-                // Redirect to company dashboard or other success page
+                JSONObject successResponse = new JSONObject();
+                successResponse.put("message", "Job posted successfully.");
+                out.println(successResponse.toString()); 
             } else {
-                out.println("Failed to add talent requirement. Please try again.");
+                JSONObject errorResponse = new JSONObject();
+                errorResponse.put("error", "Failed to post job.");
+                out.println(errorResponse.toString()); 
             }
 
-            connection.close(); // Close the database connection
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
+        }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/talent_insider", "root", "Ansh@123");
+
+            String sql = "SELECT * FROM job"; 
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+
+            JSONArray jobList = new JSONArray();
+            while (result.next()) {
+                JSONObject job = new JSONObject();
+                job.put("title", result.getString("title"));
+                job.put("desc", result.getString("desc"));
+                job.put("salary", result.getString("salary"));
+                job.put("skills", result.getString("skills"));
+                job.put("deadline", result.getString("deadline"));
+                // ... Add any other relevant columns 
+
+                jobList.put(job);
+            }
+
+            out.println(jobList.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");

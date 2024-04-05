@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.talent_insider.AppTest" time="0.015" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.class.path" value="/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/target/test-classes:/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/target/classes:/Users/lakshya/.m2/repository/maven/maven-war-plugin/20030413.023708/maven-war-plugin-20030413.023708.jar:/Users/lakshya/.m2/repository/org/mortbay/jetty/servlet-annotation-spec/3.0.pre0/servlet-annotation-spec-3.0.pre0.jar:/Users/lakshya/.m2/repository/org/mortbay/jetty/servlet-api/3.0.pre1/servlet-api-3.0.pre1.jar:/Users/lakshya/.m2/repository/javax/servlet/servlet-api/3.0-alpha-1/servlet-api-3.0-alpha-1.jar:/Users/lakshya/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar:/Users/lakshya/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar:/Users/lakshya/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar:/Users/lakshya/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/lakshya/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="java.vm.vendor" value="Homebrew"/>
+=======
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.talent_insider.AppTest" time="0.047" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="20"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="D:\Talent Insider\talent_insider\target\test-classes;D:\Talent Insider\talent_insider\target\classes;C:\Users\anshs\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\anshs\.m2\repository\maven\maven-war-plugin\20030413.023708\maven-war-plugin-20030413.023708.jar;C:\Users\anshs\.m2\repository\org\mortbay\jetty\servlet-annotation-spec\3.0.pre0\servlet-annotation-spec-3.0.pre0.jar;C:\Users\anshs\.m2\repository\org\mortbay\jetty\servlet-api\3.0.pre1\servlet-api-3.0.pre1.jar;C:\Users\anshs\.m2\repository\javax\servlet\servlet-api\3.0-alpha-1\servlet-api-3.0-alpha-1.jar;C:\Users\anshs\.m2\repository\javax\servlet\javax.servlet-api\3.1.0\javax.servlet-api-3.1.0.jar;C:\Users\anshs\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\anshs\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\anshs\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\anshs\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+>>>>>>> 663e6d9a77569e24a3f950f576caeb399fdd9857
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
     <property name="os.name" value="Mac OS X"/>
     <property name="java.vm.specification.version" value="21"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IN"/>
+<<<<<<< HEAD
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/21.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
     <property name="sun.java.command" value="/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/target/surefire/surefirebooter14165176454417059574.jar /Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/target/surefire 2024-04-05T18-16-48_363-jvmRun1 surefire400550394648183925tmp surefire_04814433015622996335tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/target/test-classes:/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/target/classes:/Users/lakshya/.m2/repository/maven/maven-war-plugin/20030413.023708/maven-war-plugin-20030413.023708.jar:/Users/lakshya/.m2/repository/org/mortbay/jetty/servlet-annotation-spec/3.0.pre0/servlet-annotation-spec-3.0.pre0.jar:/Users/lakshya/.m2/repository/org/mortbay/jetty/servlet-api/3.0.pre1/servlet-api-3.0.pre1.jar:/Users/lakshya/.m2/repository/javax/servlet/servlet-api/3.0-alpha-1/servlet-api-3.0-alpha-1.jar:/Users/lakshya/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar:/Users/lakshya/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar:/Users/lakshya/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar:/Users/lakshya/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/lakshya/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+=======
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-20\bin"/>
+    <property name="sun.java.command" value="C:\Users\anshs\AppData\Local\Temp\surefire18073972548378508771\surefirebooter7102744509021888534.jar C:\Users\anshs\AppData\Local\Temp\surefire18073972548378508771 2024-04-04T21-28-09_647-jvmRun1 surefire8003927565060927018tmp surefire_013761772942492743231tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="D:\Talent Insider\talent_insider\target\test-classes;D:\Talent Insider\talent_insider\target\classes;C:\Users\anshs\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\anshs\.m2\repository\maven\maven-war-plugin\20030413.023708\maven-war-plugin-20030413.023708.jar;C:\Users\anshs\.m2\repository\org\mortbay\jetty\servlet-annotation-spec\3.0.pre0\servlet-annotation-spec-3.0.pre0.jar;C:\Users\anshs\.m2\repository\org\mortbay\jetty\servlet-api\3.0.pre1\servlet-api-3.0.pre1.jar;C:\Users\anshs\.m2\repository\javax\servlet\servlet-api\3.0-alpha-1\servlet-api-3.0-alpha-1.jar;C:\Users\anshs\.m2\repository\javax\servlet\javax.servlet-api\3.1.0\javax.servlet-api-3.1.0.jar;C:\Users\anshs\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\anshs\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\anshs\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\anshs\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+>>>>>>> 663e6d9a77569e24a3f950f576caeb399fdd9857
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/lakshya"/>
     <property name="user.language" value="en"/>
@@ -28,8 +45,13 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
+<<<<<<< HEAD
     <property name="apple.awt.application.name" value="ForkedBooter"/>
     <property name="surefire.real.class.path" value="/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/target/surefire/surefirebooter14165176454417059574.jar"/>
+=======
+    <property name="surefire.real.class.path" value="C:\Users\anshs\AppData\Local\Temp\surefire18073972548378508771\surefirebooter7102744509021888534.jar"/>
+    <property name="user.script" value=""/>
+>>>>>>> 663e6d9a77569e24a3f950f576caeb399fdd9857
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="21.0.2"/>
@@ -58,5 +80,9 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
+<<<<<<< HEAD
   <testcase name="shouldAnswerWithTrue" classname="com.talent_insider.AppTest" time="0.001"/>
+=======
+  <testcase name="shouldAnswerWithTrue" classname="com.talent_insider.AppTest" time="0.016"/>
+>>>>>>> 663e6d9a77569e24a3f950f576caeb399fdd9857
 </testsuite>

@@ -76,8 +76,7 @@ public class companyLoginServlet extends HttpServlet {
                 if (storedPassword.equals(password)) { // Replace with secure password comparison (hashing)
                     // Successful Login
                     HttpSession session = request.getSession();
-                    session.setAttribute("companyUsername", username); 
-                    response.sendRedirect("companyLoginServlet.java "); // Change to your company dashboard
+                    session.setAttribute("companyUsername", username); // Change to your company dashboard
                 } else {
                     out.println("Incorrect password.");
                 }
