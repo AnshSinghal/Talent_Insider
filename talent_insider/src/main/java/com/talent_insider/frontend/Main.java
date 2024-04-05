@@ -9,6 +9,11 @@ import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +24,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import org.json.JSONObject;
 
 public class Main {
 
@@ -120,5 +127,56 @@ public class Main {
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.add(mainPanel);
+    }
+
+    public static void getGigs(){
+        try {
+                    // 1. Prepare the URL
+                    String endpoint = "http://localhost:8080/ansh_singhal/job?title=&description=&skills=&salary=&deadline=";
+                    URL url = new URL(endpoint);
+
+                    // 2. Open the connection
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    // 3. Get the response code
+                    int responseCode = connection.getResponseCode();
+                    System.out.println("Response Code: " + responseCode);
+
+                    // 4. Process the response
+                    if (responseCode == 200) { // Success
+                        try (BufferedReader in = new BufferedReader(
+                                new InputStreamReader(connection.getInputStream()))) {
+                            String inputLine;
+                            StringBuilder response = new StringBuilder();
+                            while ((inputLine = in.readLine()) != null) {
+                                response.append(inputLine);
+                            }
+                            // Process the response (Example: Display in a JTextArea)
+                            // JTextArea textArea = new JTextArea(response.toString());
+                            // JScrollPane scrollPane = new JScrollPane(textArea);
+                            // JOptionPane.showMessageDialog(null, scrollPane);
+
+                            JSONObject jsonResponse = new JSONObject(response.toString());
+                            // String name = jsonResponse.getString("name");
+                            // String age = jsonResponse.getString("age");
+                            // String bio = jsonResponse.getString("bio");
+                            // String skills = jsonResponse.getString("skills");
+                            // String experience = jsonResponse.getString("experience");
+                            
+                            // System.out.println("Name: " + name);
+                            // System.out.println("Age: " + age);
+                            // System.out.println("Bio: " + bio);
+                            // System.out.println("Skills: " + skills);
+                            // System.out.println("Experience: " + experience);
+                            System.out.println(jsonResponse);
+                        }
+                    } else {
+                        // Handle error
+                        System.out.println("Request failed. Response Code: " + responseCode);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
     }
 }
