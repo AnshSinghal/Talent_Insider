@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/ClientProfileWindow.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/GigWindow.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/HomeWindowIsLoginClient.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/ClientLoginWindow.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/App.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/companyLoginServlet.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/Gig.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/SignupTalent.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/TalentProfileWindow.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/loginServlet.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/CreateProfileTalent.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/jobServlet.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/Main.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/signupServlet.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/DatabaseConnection.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/NewReq.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/HomeWindowIsLoginTalent.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/GigsPanel.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/TalentLoginWindow.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/companySignupServlet.java
-/Users/lakshya/Programming/Personal_Projects/Talent_Insider/talent_insider/src/main/java/com/talent_insider/frontend/SignupClient.java
-=======
 D:\Talent Insider\talent_insider\src\main\java\com\talent_insider\frontend\GigsPanel.java
 D:\Talent Insider\talent_insider\src\main\java\com\talent_insider\frontend\ClientProfileWindow.java
 D:\Talent Insider\talent_insider\src\main\java\com\talent_insider\DatabaseConnection.java
@@ -43,4 +20,3 @@ D:\Talent Insider\talent_insider\src\main\java\com\talent_insider\frontend\Gig.j
 D:\Talent Insider\talent_insider\src\main\java\com\talent_insider\App.java
 D:\Talent Insider\talent_insider\src\main\java\com\talent_insider\loginServlet.java
 D:\Talent Insider\talent_insider\src\main\java\com\talent_insider\signupServlet.java
->>>>>>> 663e6d9a77569e24a3f950f576caeb399fdd9857

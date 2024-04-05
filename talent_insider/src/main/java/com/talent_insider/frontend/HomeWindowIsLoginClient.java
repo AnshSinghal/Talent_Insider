@@ -71,7 +71,7 @@ public class HomeWindowIsLoginClient extends JFrame{
 
                 try {
                     // 1. Prepare the URL
-                    String endpoint = "http://localhost:8080/ansh_singhal/companySignup?username=ansh&password=&email=&name=&description=&website=";
+                    String endpoint = "http://localhost:8080/ansh_singhal/companySignup?username=Paytm&password=&email=&name=&description=&website=";
                     URL url = new URL(endpoint);
 
                     // 2. Open the connection
@@ -102,11 +102,13 @@ public class HomeWindowIsLoginClient extends JFrame{
                             String description = jsonResponse.getString("description");
                             String website = jsonResponse.getString("website");
 
+                            System.out.println(jsonResponse);
                             
                             System.out.println("Name: " + name);
                             System.out.println("Email: " + email);
                             System.out.println("Description: " + description);
                             System.out.println("Website: " + website);
+
                         }
                     } else {
                         // Handle error

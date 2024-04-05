@@ -99,7 +99,7 @@ public class HomeWindowIsLoginTalent extends JFrame {
 
                             JSONObject jsonResponse = new JSONObject(response.toString());
                             String name = jsonResponse.getString("name");
-                            String age = jsonResponse.getString("age");
+                            int age = jsonResponse.getInt("age");
                             String bio = jsonResponse.getString("bio");
                             String skills = jsonResponse.getString("skills");
                             String experience = jsonResponse.getString("experience");
