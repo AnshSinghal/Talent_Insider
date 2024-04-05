@@ -1,90 +1,73 @@
 package com.talent_insider;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.PreparedStatement;
+import org.json.JSONObject;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/signup")
+@WebServlet("/signup") 
 public class signupServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // RequestDispatcher dispatcher = request.getRequestDispatcher("src/main/java/com/talent_insider/frontend/ClientLoginWindow.java");
-        // dispatcher.forward(request, response);
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><head><title>Method Not Allowed</title></head><body>");
-        out.println("<h1>Method Not Allowed</h1>");
-        out.println("<p>The requested resource does not support GET requests.</p>");
-        out.println("</body></html>");
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Retrieve user input parameters
-        String name = request.getParameter("name");
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter(); 
+
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
         String email = request.getParameter("email");
         String number = request.getParameter("number");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
         
-        PrintWriter out = response.getWriter();
-        RequestDispatcher dispatcher = null;
 
-        try{
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/talent_insider", "root", "Ansh@123");
-            String sql = "INSERT INTO user_login (name, username, password, email, number) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
-            statement.setString(2, username);
-            statement.setString(3, password);
-            statement.setString(4, email);
-            statement.setString(5, number);
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                out.println("User signed up successfully!");
-            }
-            else{
-                out.println("User not signed up successfully!");
+
+            if (userExists(connection, username, email, number)) {
+                JSONObject errorResponse = new JSONObject();
+                errorResponse.put("error", "User already exists.");
+                out.println(errorResponse.toString()); 
+            } else {
+                insertUser(connection, username, email, number,name,password); 
+                JSONObject successResponse = new JSONObject();
+                successResponse.put("message", "User signed up successfully!");
+                out.println(successResponse.toString()); 
             }
 
-
-        } catch(Exception e){
-            out.println(e);
-
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
         }
-        
-        // Assuming number is of type bigint
+    }
 
-        // Insert user data into the database
-        // try {
-        //     Connection connection = DatabaseConnection.getConnection();
-        //     String sql = "INSERT INTO user_login (name, username, password, email, number) VALUES (?, ?, ?, ?, ?)";
-        //     PreparedStatement statement = connection.prepareStatement(sql);
-        //     statement.setString(1, name);
-        //     statement.setString(2, username);
-        //     statement.setString(3, password);
-        //     statement.setString(4, email);
-        //     statement.setString(5, number);
-        //     int rowsInserted = statement.executeUpdate();
-        //     if (rowsInserted > 0) {
-        //         PrintWriter out = response.getWriter();
-        //         out.println("User signed up successfully!");
-        //     }
-        //     connection.close();
-        // } catch (SQLException e) {
-        //     e.printStackTrace();
-        //     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error occurred while signing up");
-        // }
+    private boolean userExists(Connection connection, String username, String email, String number) throws SQLException {
+        String sql = "SELECT * FROM user_login WHERE username = ? OR email = ? OR number = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, username);
+        statement.setString(2, email);
+        statement.setString(3, number);
+        ResultSet result = statement.executeQuery();
+        return result.next(); // Returns true if a user is found
+    }
+
+    private void insertUser(Connection connection, String username, String email, String number, String name, String password) throws SQLException {
+        String sql = "INSERT INTO user_login (username, email, number, password, name) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, username);
+        statement.setString(2, email);
+        statement.setString(3, number);
+        statement.setString(3, password);
+        statement.setString(3, name);
+        statement.executeUpdate();
     }
 }

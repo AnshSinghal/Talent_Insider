@@ -34,6 +34,7 @@ com\talent_insider\frontend\SignupClient$1.class
 com\talent_insider\companySignupServlet.class
 com\talent_insider\frontend\HomeWindowIsLoginClient.class
 com\talent_insider\companyLoginServlet.class
+com\talent_insider\userProfileServlet.class
 com\talent_insider\frontend\HomeWindowIsLoginTalent.class
 com\talent_insider\frontend\TalentLoginWindow$1.class
 com\talent_insider\frontend\GigsPanel$1.class
