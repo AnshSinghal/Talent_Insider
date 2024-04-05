@@ -9,6 +9,10 @@ import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +23,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import org.json.JSONObject;
 
 public class HomeWindowIsLoginClient extends JFrame{
     HomeWindowIsLoginClient(){
@@ -46,6 +52,9 @@ public class HomeWindowIsLoginClient extends JFrame{
         navbar.add(profile);
 
         postReq.addActionListener(new ActionListener() {
+
+
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Window window = SwingUtilities.getWindowAncestor(postReq);
@@ -59,6 +68,54 @@ public class HomeWindowIsLoginClient extends JFrame{
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                try {
+                    // 1. Prepare the URL
+                    String endpoint = "http://localhost:8080/ansh_singhal/companySignup?username=ansh&password=&email=&name=&description=&website=";
+                    URL url = new URL(endpoint);
+
+                    // 2. Open the connection
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    // 3. Get the response code
+                    int responseCode = connection.getResponseCode();
+                    System.out.println("Response Code: " + responseCode);
+
+                    // 4. Process the response
+                    if (responseCode == 200) { // Success
+                        try (BufferedReader in = new BufferedReader(
+                                new InputStreamReader(connection.getInputStream()))) {
+                            String inputLine;
+                            StringBuilder response = new StringBuilder();
+                            while ((inputLine = in.readLine()) != null) {
+                                response.append(inputLine);
+                            }
+                            // Process the response (Example: Display in a JTextArea)
+                            // JTextArea textArea = new JTextArea(response.toString());
+                            // JScrollPane scrollPane = new JScrollPane(textArea);
+                            // JOptionPane.showMessageDialog(null, scrollPane);
+
+                            JSONObject jsonResponse = new JSONObject(response.toString());
+                            String name = jsonResponse.getString("name");
+                            String email = jsonResponse.getString("email");
+                            String description = jsonResponse.getString("description");
+                            String website = jsonResponse.getString("website");
+
+                            
+                            System.out.println("Name: " + name);
+                            System.out.println("Email: " + email);
+                            System.out.println("Description: " + description);
+                            System.out.println("Website: " + website);
+                        }
+                    } else {
+                        // Handle error
+                        System.out.println("Request failed. Response Code: " + responseCode);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
                 Window window = SwingUtilities.getWindowAncestor(profile);
                 // if (window != null) {
                 //     window.dispose();

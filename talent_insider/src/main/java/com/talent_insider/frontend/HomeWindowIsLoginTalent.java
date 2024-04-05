@@ -27,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
+import org.json.JSONObject;
+
 public class HomeWindowIsLoginTalent extends JFrame {
     HomeWindowIsLoginTalent() {
         this.setVisible(true);
@@ -91,9 +93,22 @@ public class HomeWindowIsLoginTalent extends JFrame {
                                 response.append(inputLine);
                             }
                             // Process the response (Example: Display in a JTextArea)
-                            JTextArea textArea = new JTextArea(response.toString());
-                            JScrollPane scrollPane = new JScrollPane(textArea);
-                            JOptionPane.showMessageDialog(null, scrollPane);
+                            // JTextArea textArea = new JTextArea(response.toString());
+                            // JScrollPane scrollPane = new JScrollPane(textArea);
+                            // JOptionPane.showMessageDialog(null, scrollPane);
+
+                            JSONObject jsonResponse = new JSONObject(response.toString());
+                            String name = jsonResponse.getString("name");
+                            String age = jsonResponse.getString("age");
+                            String bio = jsonResponse.getString("bio");
+                            String skills = jsonResponse.getString("skills");
+                            String experience = jsonResponse.getString("experience");
+                            
+                            System.out.println("Name: " + name);
+                            System.out.println("Age: " + age);
+                            System.out.println("Bio: " + bio);
+                            System.out.println("Skills: " + skills);
+                            System.out.println("Experience: " + experience);
                         }
                     } else {
                         // Handle error
