@@ -22,11 +22,12 @@ public class signupServlet extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter(); 
 
+        String name = request.getParameter("name");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String number = request.getParameter("number");
         String password = request.getParameter("password");
-        String name = request.getParameter("name");
+        
         
 
         try {
@@ -66,8 +67,8 @@ public class signupServlet extends HttpServlet {
         statement.setString(1, username);
         statement.setString(2, email);
         statement.setString(3, number);
-        statement.setString(3, password);
-        statement.setString(3, name);
+        statement.setString(4, password);
+        statement.setString(5, name);
         statement.executeUpdate();
     }
 }

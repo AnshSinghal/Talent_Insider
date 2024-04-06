@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,11 +24,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        getGigs();
 
         ImageIcon imageIcon = new ImageIcon("talent_insider/src/main/java/com/talent_insider/frontend/talent.png");
         Image image = imageIcon.getImage();
@@ -157,19 +159,19 @@ public class Main {
                             // JScrollPane scrollPane = new JScrollPane(textArea);
                             // JOptionPane.showMessageDialog(null, scrollPane);
 
-                            JSONObject jsonResponse = new JSONObject(response.toString());
+                            JSONArray jsonResponse = new JSONArray(response.toString());
                             // String name = jsonResponse.getString("name");
                             // String age = jsonResponse.getString("age");
                             // String bio = jsonResponse.getString("bio");
                             // String skills = jsonResponse.getString("skills");
                             // String experience = jsonResponse.getString("experience");
-                            
+
                             // System.out.println("Name: " + name);
                             // System.out.println("Age: " + age);
                             // System.out.println("Bio: " + bio);
                             // System.out.println("Skills: " + skills);
                             // System.out.println("Experience: " + experience);
-                            System.out.println(jsonResponse);
+                            System.out.println(jsonResponse.toString());
                         }
                     } else {
                         // Handle error
