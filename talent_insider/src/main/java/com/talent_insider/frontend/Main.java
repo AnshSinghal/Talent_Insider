@@ -27,11 +27,13 @@ import javax.swing.SwingUtilities;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.mysql.cj.xdevapi.JsonArray;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        getGigs();
+        // getGigs();
 
         ImageIcon imageIcon = new ImageIcon("talent_insider/src/main/java/com/talent_insider/frontend/talent.png");
         Image image = imageIcon.getImage();
@@ -104,9 +106,9 @@ public class Main {
         heroPanel.add(sideBySidePanel, BorderLayout.WEST);
 
         List<GigsPanel> gigPanels = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            GigsPanel gigPanel = new GigsPanel(new Gig("Job Title " + i, "Description " + i, "Skills " + i,
-                    "Time Expected " + i, "Payment Amount " + i));
+        for (int i = 0; i < getGigs().length(); i++) {
+            GigsPanel gigPanel = new GigsPanel(new Gig(getGigs().getJSONObject(i).getString("title"), getGigs().getJSONObject(i).getString("description"), getGigs().getJSONObject(i).getString("skills"),
+                    getGigs().getJSONObject(i).getString("deadline"), getGigs().getJSONObject(i).getString("salary")));
             gigPanels.add(gigPanel);
         }
 
@@ -131,7 +133,7 @@ public class Main {
         frame.add(mainPanel);
     }
 
-    public static void getGigs(){
+    public static JSONArray getGigs(){
         try {
                     // 1. Prepare the URL
                     String endpoint = "http://localhost:8080/ansh_singhal/job?title=&description=&skills=&salary=&deadline=";
@@ -172,13 +174,16 @@ public class Main {
                             // System.out.println("Skills: " + skills);
                             // System.out.println("Experience: " + experience);
                             System.out.println(jsonResponse.toString());
+                            return jsonResponse;
                         }
                     } else {
                         // Handle error
                         System.out.println("Request failed. Response Code: " + responseCode);
+                        return null;
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    return null;
                 }
     }
 }

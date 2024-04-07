@@ -113,7 +113,7 @@ public class SignupClient extends JFrame{
                 if (window != null) {
                     window.dispose();
                 }
-                new HomeWindowIsLoginClient();
+                new HomeWindowIsLoginClient(userNameField.getText());
             }
         });
         
