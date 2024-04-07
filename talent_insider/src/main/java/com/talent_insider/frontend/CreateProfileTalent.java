@@ -106,7 +106,7 @@ public class CreateProfileTalent extends JFrame{
                 if (window != null) {
                     window.dispose();
                 }
-                new TalentProfileWindow((JFrame) window);
+                new TalentProfileWindow((JFrame) window, nameField.getText(), Integer.parseInt(ageField.getText()), bioField.getText(), skillsField.getText(), experienceField.getText());
             }
         });
         

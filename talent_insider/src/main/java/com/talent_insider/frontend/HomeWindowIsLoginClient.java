@@ -27,7 +27,11 @@ import javax.swing.SwingUtilities;
 import org.json.JSONObject;
 
 public class HomeWindowIsLoginClient extends JFrame{
-    HomeWindowIsLoginClient(){
+
+    final String username;
+
+    HomeWindowIsLoginClient(String username){
+        this.username = username;
         this.setVisible(true);
         this.setTitle("Talent Insider");
         this.setSize(500, 500);
@@ -69,9 +73,14 @@ public class HomeWindowIsLoginClient extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                String name = "";
+                String email = "";
+                String description = "";
+                String website = "";
+
                 try {
                     // 1. Prepare the URL
-                    String endpoint = "http://localhost:8080/ansh_singhal/companySignup?username=Paytm&password=&email=&name=&description=&website=";
+                    String endpoint = "http://localhost:8080/ansh_singhal/companySignup?username="+ username +"&password=&email=&name=&description=&website=";
                     URL url = new URL(endpoint);
 
                     // 2. Open the connection
@@ -97,10 +106,10 @@ public class HomeWindowIsLoginClient extends JFrame{
                             // JOptionPane.showMessageDialog(null, scrollPane);
 
                             JSONObject jsonResponse = new JSONObject(response.toString());
-                            String name = jsonResponse.getString("name");
-                            String email = jsonResponse.getString("email");
-                            String description = jsonResponse.getString("description");
-                            String website = jsonResponse.getString("website");
+                            name = jsonResponse.getString("name");
+                            email = jsonResponse.getString("email");
+                            description = jsonResponse.getString("description");
+                            website = jsonResponse.getString("website");
 
                             System.out.println(jsonResponse);
                             
@@ -122,7 +131,7 @@ public class HomeWindowIsLoginClient extends JFrame{
                 // if (window != null) {
                 //     window.dispose();
                 // }
-                new ClientProfileWindow((JFrame) window);
+                new ClientProfileWindow((JFrame) window, name, email, description, website);
             }
         });
 
@@ -170,9 +179,9 @@ public class HomeWindowIsLoginClient extends JFrame{
         heroPanel.add(sideBySidePanel, BorderLayout.WEST);
 
         List<GigsPanel> gigPanels = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            GigsPanel gigPanel = new GigsPanel(new Gig("Job Title " + i, "Description " + i, "Skills " + i,
-                    "Time Expected " + i, "Payment Amount " + i));
+        for (int i = 0; i < Main.getGigs().length(); i++) {
+            GigsPanel gigPanel = new GigsPanel(new Gig(Main.getGigs().getJSONObject(i).getString("title"), Main.getGigs().getJSONObject(i).getString("description"), Main.getGigs().getJSONObject(i).getString("skills"),
+                    Main.getGigs().getJSONObject(i).getString("deadline"), Main.getGigs().getJSONObject(i).getString("salary")));
             gigPanels.add(gigPanel);
         }
 

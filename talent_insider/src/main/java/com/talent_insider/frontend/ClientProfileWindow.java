@@ -16,7 +16,17 @@ import javax.swing.SwingUtilities;
 
 public class ClientProfileWindow extends JFrame{
     private final JFrame previousWindow;
-    ClientProfileWindow(JFrame previousWindow){
+
+    final public String clientName;
+    final public String clientDescription;
+    final public String clientEmail;
+    final public String clientWebsite;
+
+    ClientProfileWindow(JFrame previousWindow, String clientName, String clientDescription, String clientEmail, String clientWebsite){
+        this.clientName = clientName;
+        this.clientDescription = clientDescription;
+        this.clientEmail = clientEmail;
+        this.clientWebsite = clientWebsite;
         this.previousWindow = previousWindow;
         this.setVisible(true);
         this.setTitle("Profile");
@@ -28,27 +38,27 @@ public class ClientProfileWindow extends JFrame{
         contentPanel.setLayout(new GridLayout(5, 1));
 
         // Name
-        JLabel nameLabel = new JLabel("Name: " + getClientName());
+        JLabel nameLabel = new JLabel("Name: " + clientName);
         nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPanel.add(nameLabel);
 
         // Username
-        JLabel usernameLabel = new JLabel("Username: " + getClientUsername());
+        JLabel usernameLabel = new JLabel("Username: ");
         usernameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        contentPanel.add(usernameLabel);
+        // contentPanel.add(usernameLabel);
 
         // Description
-        JLabel descriptionLabel = new JLabel("Description: " + getClientDescription());
+        JLabel descriptionLabel = new JLabel("Description: " + clientDescription);
         descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPanel.add(descriptionLabel);
 
         // Email
-        JLabel emailLabel = new JLabel("Email: " + getClientEmail());
+        JLabel emailLabel = new JLabel("Email: " + clientEmail);
         emailLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPanel.add(emailLabel);
 
         // Website
-        JLabel websiteLabel = new JLabel("Website: " + getClientWebsite());
+        JLabel websiteLabel = new JLabel("Website: " + clientWebsite);
         websiteLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPanel.add(websiteLabel);
 
@@ -79,30 +89,5 @@ public class ClientProfileWindow extends JFrame{
         mainPanel.add(logoutButtonPanel, BorderLayout.SOUTH);
 
         this.add(mainPanel, BorderLayout.CENTER);
-    }
-
-    private String getClientWebsite() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
-    }
-
-    private String getClientEmail() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
-    }
-
-    private String getClientDescription() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
-    }
-
-    private String getClientUsername() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
-    }
-
-    private String getClientName() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
     }
 }

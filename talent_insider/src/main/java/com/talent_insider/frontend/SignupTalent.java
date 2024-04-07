@@ -133,7 +133,7 @@ public class SignupTalent extends JFrame{
                 if (window != null) {
                     window.dispose();
                 }
-                new HomeWindowIsLoginTalent();
+                new HomeWindowIsLoginTalent(userNameField.getText());
             }
         });
 

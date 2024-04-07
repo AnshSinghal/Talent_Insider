@@ -6,25 +6,24 @@ import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 public class TalentProfileWindow extends JFrame {
     final JFrame previousWindow;
 
-    TalentProfileWindow(JFrame previousWindow) {
+    public String talentName;
+    public int talentAge;
+    public String talentBio;
+    public String talentSkills;
+    public String talentExperience;
+
+    TalentProfileWindow(JFrame previousWindow, String talentName, int talentAge, String talentBio, String talentSkills,
+            String talentExperience) {
         this.previousWindow = previousWindow;
         this.setVisible(true);
         this.setTitle("Profile");
@@ -36,27 +35,27 @@ public class TalentProfileWindow extends JFrame {
         contentPanel.setLayout(new GridLayout(5, 1));
 
         // Name
-        JLabel nameLabel = new JLabel("Name: " + getTalentName());
+        JLabel nameLabel = new JLabel("Name: " + talentName);
         nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPanel.add(nameLabel);
 
         // age
-        JLabel ageLabel = new JLabel("age: " + getTalentAge());
+        JLabel ageLabel = new JLabel("age: " + talentAge);
         ageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPanel.add(ageLabel);
 
         // Bio
-        JLabel bioLabel = new JLabel("Bio: " + getTalentBio());
+        JLabel bioLabel = new JLabel("Bio: " + talentBio);
         bioLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPanel.add(bioLabel);
 
         // Skills
-        JLabel skillsLabel = new JLabel("Skills: " + getTalentSkills());
+        JLabel skillsLabel = new JLabel("Skills: " + talentSkills);
         skillsLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPanel.add(skillsLabel);
 
         // Experience
-        JLabel experienceLabel = new JLabel("Experience: " + getTalentExperience());
+        JLabel experienceLabel = new JLabel("Experience: " + talentExperience);
         experienceLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPanel.add(experienceLabel);
 
@@ -67,8 +66,6 @@ public class TalentProfileWindow extends JFrame {
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                
 
                 Window window = SwingUtilities.getWindowAncestor(logoutButton);
                 if (window != null) {
@@ -88,30 +85,5 @@ public class TalentProfileWindow extends JFrame {
         mainPanel.add(logoutButtonPanel, BorderLayout.SOUTH);
 
         this.add(mainPanel, BorderLayout.CENTER);
-    }
-
-    private String getTalentExperience() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
-    }
-
-    private String getTalentSkills() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
-    }
-
-    private String getTalentBio() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
-    }
-
-    private String getTalentAge() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
-    }
-
-    private String getTalentName() {
-        // TODO Auto-generated method stub
-        return "Dummy Data";
     }
 }

@@ -30,7 +30,11 @@ import javax.swing.SwingUtilities;
 import org.json.JSONObject;
 
 public class HomeWindowIsLoginTalent extends JFrame {
-    HomeWindowIsLoginTalent() {
+
+    private final String username;
+
+    HomeWindowIsLoginTalent(String username) {
+        this.username = username;
         this.setVisible(true);
         this.setTitle("Talent Insider");
         this.setSize(500, 500);
@@ -69,10 +73,14 @@ public class HomeWindowIsLoginTalent extends JFrame {
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String name = "";
+                int age = 0;
+                String bio = "";
+                String skills = "";
+                String experience = "";
                 try {
                     // 1. Prepare the URL
-                    String endpoint = "http://localhost:8080/ansh_singhal/userProfile?name=Anshss&age=&bio=&skills=&experience=";
+                    String endpoint = "http://localhost:8080/ansh_singhal/userProfile?name="+ username +"&age=&bio=&skills=&experience=";
                     URL url = new URL(endpoint);
 
                     // 2. Open the connection
@@ -98,11 +106,11 @@ public class HomeWindowIsLoginTalent extends JFrame {
                             // JOptionPane.showMessageDialog(null, scrollPane);
 
                             JSONObject jsonResponse = new JSONObject(response.toString());
-                            String name = jsonResponse.getString("name");
-                            int age = jsonResponse.getInt("age");
-                            String bio = jsonResponse.getString("bio");
-                            String skills = jsonResponse.getString("skills");
-                            String experience = jsonResponse.getString("experience");
+                            name = jsonResponse.getString("name");
+                            age = jsonResponse.getInt("age");
+                            bio = jsonResponse.getString("bio");
+                            skills = jsonResponse.getString("skills");
+                            experience = jsonResponse.getString("experience");
                             
                             System.out.println("Name: " + name);
                             System.out.println("Age: " + age);
@@ -125,7 +133,7 @@ public class HomeWindowIsLoginTalent extends JFrame {
                 if (false) {
                     new CreateProfileTalent();
                 } else {
-                    new TalentProfileWindow((JFrame) window);
+                    new TalentProfileWindow((JFrame) window, name, age, bio, skills, experience);
                 }
             }
         });
@@ -152,9 +160,9 @@ public class HomeWindowIsLoginTalent extends JFrame {
         heroPanel.add(sideBySidePanel, BorderLayout.WEST);
 
         List<GigsPanel> gigPanels = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            GigsPanel gigPanel = new GigsPanel(new Gig("Job Title " + i, "Description " + i, "Skills " + i,
-                    "Time Expected " + i, "Payment Amount " + i));
+        for (int i = 0; i < Main.getGigs().length(); i++) {
+            GigsPanel gigPanel = new GigsPanel(new Gig(Main.getGigs().getJSONObject(i).getString("title"), Main.getGigs().getJSONObject(i).getString("description"), Main.getGigs().getJSONObject(i).getString("skills"),
+                    Main.getGigs().getJSONObject(i).getString("deadline"), Main.getGigs().getJSONObject(i).getString("salary")));
             gigPanels.add(gigPanel);
         }
 
