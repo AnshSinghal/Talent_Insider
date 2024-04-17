@@ -12,6 +12,7 @@ com\talent_insider\frontend\Main.class
 com\talent_insider\frontend\CreateProfileTalent.class
 com\talent_insider\frontend\TalentLoginWindow$2.class
 com\talent_insider\DatabaseConnection.class
+com\talent_insider\frontend\ClientLoginWindow$1$1.class
 com\talent_insider\frontend\ClientLoginWindow$2.class
 com\talent_insider\frontend\Main$1.class
 com\talent_insider\loginServlet.class
@@ -27,6 +28,7 @@ com\talent_insider\frontend\HomeWindowIsLoginTalent$2.class
 com\talent_insider\frontend\NewReq.class
 com\talent_insider\App.class
 com\talent_insider\frontend\GigWindow$1.class
+com\talent_insider\frontend\TalentLoginWindow$1$1.class
 com\talent_insider\frontend\Main$2.class
 com\talent_insider\frontend\GigWindow.class
 com\talent_insider\frontend\ClientLoginWindow$1.class

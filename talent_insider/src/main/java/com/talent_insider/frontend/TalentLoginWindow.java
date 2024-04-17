@@ -71,16 +71,19 @@ public class TalentLoginWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 
                 String name = "";
-                String email = "";
-                String description = "";
-                String website = "";
+                String username = "";
                 String password = "";
+                String email = "";
+                String number = "";
 
                 try {
-                    // 1. Prepare the URL
-                    String endpoint = "http://localhost:8080/ansh_singhal/user_login?username="+ userNameField.getText() +"&password=&email=&name=&description=&website=";
-                    URL url = new URL(endpoint);
 
+                    System.out.println(userNameField.getText());
+
+                    // 1. Prepare the URL
+                    String endpoint = "http://localhost:8080/ansh_singhal/login?name="+ "&username="+userNameField.getText() +"&password=&email=&number=";
+                    URL url = new URL(endpoint);
+                    System.out.println(endpoint);
                     // 2. Open the connection
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
@@ -102,21 +105,45 @@ public class TalentLoginWindow extends JFrame {
                             // JTextArea textArea = new JTextArea(response.toString());
                             // JScrollPane scrollPane = new JScrollPane(textArea);
                             // JOptionPane.showMessageDialog(null, scrollPane);
-
+                            System.out.println(response.toString());
                             JSONObject jsonResponse = new JSONObject(response.toString());
-                            name = jsonResponse.getString("name");
-                            email = jsonResponse.getString("email");
-                            description = jsonResponse.getString("description");
-                            website = jsonResponse.getString("website");
+                            username = jsonResponse.getString("username");
                             password = jsonResponse.getString("password");
+                            email = jsonResponse.getString("email");
+                            number = jsonResponse.getString("number");
+                            name = jsonResponse.getString("name");
 
                             System.out.println(jsonResponse);
                             
                             System.out.println("Name: " + name);
+                            System.out.println("Username: " + username);
+                            System.out.println("Password: " + password);
                             System.out.println("Email: " + email);
-                            System.out.println("Description: " + description);
-                            System.out.println("Website: " + website);
-
+                            System.out.println("Number: " + number);
+                            Window window = SwingUtilities.getWindowAncestor(loginButton);
+                            if (window != null) {
+                                window.dispose();
+                            }
+                            if (passwordField.getText().equals(password)) {
+                                Window window1 = SwingUtilities.getWindowAncestor(loginButton);
+                                if (window1 != null) {
+                                    window1.dispose();
+                                }
+                                window.dispose();
+                                System.out.println(name);
+                                new HomeWindowIsLoginTalent(name);
+                            } else {
+                                JFrame errorFrame = new JFrame();
+                        JPanel errorPanel = new JPanel();
+                        JLabel errorLabel = new JLabel("Invalid Username or Password");
+                        errorPanel.add(errorLabel);
+                        errorFrame.add(errorPanel, BorderLayout.SOUTH);
+                        errorFrame.setSize(200, 400);
+                        errorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        errorFrame.setVisible(true);
+                        System.out.println("Request failed. Response Code: " + responseCode);
+                        new Main();
+                            }
                         }
                     } else {
                         // Handle error
@@ -132,6 +159,32 @@ public class TalentLoginWindow extends JFrame {
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    JFrame errorFrame = new JFrame();
+                        JPanel errorPanel = new JPanel();
+                        JLabel errorLabel = new JLabel("Invalid Username or Password");
+                        JButton errorButton = new JButton("Try Again");
+                        errorPanel.add(errorLabel);
+                        errorFrame.add(errorButton, BorderLayout.SOUTH);
+                        errorFrame.setSize(200, 400);
+                        errorButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Window window = SwingUtilities.getWindowAncestor(errorButton);
+                                if (window != null) {
+                                    window.dispose();
+                                }
+                                new TalentLoginWindow();
+                            }
+                        });
+                        errorFrame.add(errorPanel, BorderLayout.NORTH);
+                        errorFrame.setSize(200, 200);
+                        errorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        errorFrame.setVisible(true);
+                        Window window = SwingUtilities.getWindowAncestor(loginButton);
+                        if (window != null) {
+                            window.dispose();
+                        }
+                        new Main();
                 }
 
                 Window window = SwingUtilities.getWindowAncestor(loginButton);
@@ -143,10 +196,11 @@ public class TalentLoginWindow extends JFrame {
                     if (window1 != null) {
                         window1.dispose();
                     }
-                    new ClientLoginWindow();
-                } else {
-                    new HomeWindowIsLoginClient(userNameField.getText());
-                }
+                    // new ClientLoginWindow();
+                } 
+                // else {
+                //     new HomeWindowIsLoginClient(userNameField.getText());
+                // }
             }
         });
 

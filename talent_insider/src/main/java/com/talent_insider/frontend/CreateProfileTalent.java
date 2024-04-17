@@ -17,7 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 public class CreateProfileTalent extends JFrame{
-    CreateProfileTalent(){
+    JFrame prevWindow;
+    CreateProfileTalent(JFrame prevWindow){
+        this.prevWindow = prevWindow;
         this.setVisible(true);
         this.setTitle("Profile");
         this.setSize(500, 500);
@@ -93,6 +95,12 @@ public class CreateProfileTalent extends JFrame{
                     // 6. Process the response (if needed)
                     if (responseCode == 200 || responseCode == 201) { // Success codes
                         // Read response using InputStream from connection
+                        Window window = SwingUtilities.getWindowAncestor(loginButton);
+                        if (window != null) {
+                            window.dispose();
+                        }
+                        prevWindow.dispose();
+                        new HomeWindowIsLoginTalent(nameField.getText());
                     } else {
                         // Handle error
                     }

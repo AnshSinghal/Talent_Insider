@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException; 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -57,6 +60,63 @@ public class loginServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
+        }
+    }
+
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json"); 
+        PrintWriter out = response.getWriter(); 
+
+        // Get the name parameter from the request
+        String username = request.getParameter("username");
+
+        if (username == null || username.isEmpty()) {
+            JSONObject errorResponse = new JSONObject();
+            errorResponse.put("error", "Please provide a username.");
+            out.println(errorResponse.toString());
+            return;
+        }
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/talent_insider", "root", "Ansh@123");
+
+            String sql = "SELECT name,username,password,email,number FROM user_login WHERE username = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username); 
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                JSONObject profileData = new JSONObject();
+                profileData.put("name", result.getString("name"));
+                profileData.put("username", result.getString("username"));
+                profileData.put("password", result.getString("password"));
+                profileData.put("email", result.getString("email"));
+                profileData.put("number", result.getString("number"));
+
+                out.println(profileData.toString());
+            } else {
+                JSONObject errorResponse = new JSONObject();
+                errorResponse.put("error", "User profile not found.");
+                out.println(errorResponse.toString()); 
+            }
+
+            connection.close();
+        } catch (Exception e) {
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 500 Error
+    
+            JSONObject errorResponse = new JSONObject();
+            errorResponse.put("error", "Server Error");
+    
+            // Build detailed error information
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionDetails = sw.toString();
+            errorResponse.put("detailedMessage", exceptionDetails); 
+    
+            out.println(errorResponse.toString());
         }
     }
 }

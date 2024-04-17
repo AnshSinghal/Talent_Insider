@@ -62,7 +62,10 @@ public class jobServlet extends HttpServlet {
             connection.close(); // Close the database connection
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
+            JSONObject errorResponse = new JSONObject();
+            errorResponse.put("error",e.getMessage());
+            out.println(errorResponse.toString()); 
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
     

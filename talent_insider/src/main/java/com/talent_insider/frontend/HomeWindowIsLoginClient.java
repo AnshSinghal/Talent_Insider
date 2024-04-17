@@ -44,7 +44,7 @@ public class HomeWindowIsLoginClient extends JFrame{
 
         // navbar
         JPanel navbar = new JPanel();
-        navbar.setBackground(Color.GRAY);
+        navbar.setBackground(new Color(0, 0, 77));
         navbar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton postReq = new JButton("Post a Requirement");
         // JButton talentLogin = new JButton("Login as a Talent");
@@ -61,11 +61,11 @@ public class HomeWindowIsLoginClient extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Window window = SwingUtilities.getWindowAncestor(postReq);
+                Window window = SwingUtilities.getWindowAncestor(postReq);
                 // if (window != null) {
                 //     window.dispose();
                 // }
-                new NewReq();
+                new NewReq((JFrame)window, username);
             }
         });
 
@@ -106,11 +106,11 @@ public class HomeWindowIsLoginClient extends JFrame{
                             // JOptionPane.showMessageDialog(null, scrollPane);
 
                             JSONObject jsonResponse = new JSONObject(response.toString());
-                            name = jsonResponse.getString("name");
                             email = jsonResponse.getString("email");
                             description = jsonResponse.getString("description");
                             website = jsonResponse.getString("website");
-
+                            name = jsonResponse.getString("name");
+                            
                             System.out.println(jsonResponse);
                             
                             System.out.println("Name: " + name);

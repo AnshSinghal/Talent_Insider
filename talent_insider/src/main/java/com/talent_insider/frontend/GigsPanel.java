@@ -22,9 +22,11 @@ public class GigsPanel extends JPanel {
 
     public GigsPanel(Gig gig) {
         this.gig = gig;
+        // setBackground(Color.BLUE);
         setLayout(new GridBagLayout());
         setBorder(new RoundedBorder(16));
-
+        // this.setBackground(Color.BLUE);
+        // setForeground(Color.BLUE);
         addJobTitleLabel();
         addDescriptionLabel();
         addSkillsLabel();
@@ -51,7 +53,7 @@ public class GigsPanel extends JPanel {
     private void addPaymentAmountLabel() {
         JLabel titleLabel = new JLabel(gig.getPaymentAmount());
         titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
-
+        titleLabel.setForeground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -64,7 +66,7 @@ public class GigsPanel extends JPanel {
     private void addTimeExpectedLabel() {
         JLabel titleLabel = new JLabel(gig.getTimeExpected());
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-
+        titleLabel.setForeground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -77,7 +79,7 @@ public class GigsPanel extends JPanel {
     private void addSkillsLabel() {
         JLabel titleLabel = new JLabel(gig.getSkills());
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-
+        titleLabel.setForeground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -90,7 +92,7 @@ public class GigsPanel extends JPanel {
     private void addDescriptionLabel() {
         JLabel titleLabel = new JLabel(gig.getDescription());
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 10));
-
+        titleLabel.setForeground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -103,7 +105,7 @@ public class GigsPanel extends JPanel {
     private void addJobTitleLabel() {
         JLabel titleLabel = new JLabel(gig.getJobTitle());
         titleLabel.setFont(new Font("Arial", Font.BOLD, 14));
-
+        titleLabel.setForeground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -126,7 +128,7 @@ class RoundedBorder implements Border {
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(Color.GRAY);
+        g2d.setColor(new Color(0, 0, 77));
         g2d.fillRoundRect(x, y, width - 1, height - 1, radius, radius);
     }
 

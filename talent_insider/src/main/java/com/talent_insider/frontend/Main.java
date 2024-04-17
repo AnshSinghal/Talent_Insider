@@ -42,7 +42,7 @@ public class Main {
 
         // navbar
         JPanel navbar = new JPanel();
-        navbar.setBackground(Color.GRAY);
+        navbar.setBackground(new Color(0, 0, 77));
         navbar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         final JButton postReq = new JButton("Post a Requirement");
         final JButton talentLogin = new JButton("Login as a Talent");
@@ -58,7 +58,7 @@ public class Main {
                 if (window != null) {
                     window.dispose();
                 }
-                new NewReq();
+                // new NewReq();
             }
         });
 
@@ -109,7 +109,8 @@ public class Main {
         for (int i = 0; i < getGigs().length(); i++) {
             GigsPanel gigPanel = new GigsPanel(new Gig(getGigs().getJSONObject(i).getString("title"), getGigs().getJSONObject(i).getString("description"), getGigs().getJSONObject(i).getString("skills"),
                     getGigs().getJSONObject(i).getString("deadline"), getGigs().getJSONObject(i).getString("salary")));
-            gigPanels.add(gigPanel);
+                    // gigPanel.setBackground(Color.BLUE);
+                    gigPanels.add(gigPanel);
         }
 
         // Container for gigs

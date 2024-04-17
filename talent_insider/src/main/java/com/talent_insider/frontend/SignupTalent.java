@@ -77,7 +77,7 @@ public class SignupTalent extends JFrame{
         numberPanel.add(numberField);
         // Login Button
         JPanel loginButtonPanel = new JPanel();
-        final JButton loginButton = new JButton("Login");
+        final JButton loginButton = new JButton("Signup");
         loginButtonPanel.add(loginButton);
 
         loginButton.addActionListener(new ActionListener() {

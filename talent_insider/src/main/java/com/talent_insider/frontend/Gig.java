@@ -15,19 +15,19 @@ public class Gig {
         this.paymentAmount = paymentAmount;
     }
     public String getJobTitle() {
-        return jobTitle;
+        return "Title: " + jobTitle;
     }
     public String getDescription() {
-        return description;
+        return "Description: " + description;
     }
     public String getSkills() {
-        return skills;
+        return "Skills: " + skills;
     }
     public String getTimeExpected() {
-        return timeExpected;
+        return "Deadline: " + timeExpected;
     }
     public String getPaymentAmount() {
-        return paymentAmount;
+        return "Perks: " + paymentAmount;
     }
     
 } 

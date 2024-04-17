@@ -11,6 +11,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
+import java.io.BufferedReader;
+import java.net.URLEncoder;
+import java.io.InputStreamReader;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,8 +21,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import org.json.JSONArray;
+
 public class NewReq extends JFrame {
-    public NewReq() {
+    JFrame prevWindow;
+    String username;
+    public NewReq(JFrame prevWindow, String username) {
+        this.username = username;
+        this.prevWindow = prevWindow;
         this.setVisible(true);
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -66,7 +75,7 @@ public class NewReq extends JFrame {
         textField4.setColumns(20);
         contentPanel.add(textField4);
 
-        JLabel label5 = new JLabel("Payment Amount:");
+        JLabel label5 = new JLabel("Perks:");
         label5.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
         contentPanel.add(label5);
         JTextField textField5 = new JTextField();
@@ -79,11 +88,26 @@ public class NewReq extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(textField1.getText());
+                System.out.println(textField2.getText());
+                System.out.println(textField3.getText());
+                System.out.println(textField4.getText());
+                System.out.println(textField5.getText());
 
                 try {
                     // 1. Prepare the URL
-                    String endpoint = "http://localhost:8080/ansh_singhal/job?title="+ textField1.getText() +"&description="+ textField2.getText() +"&skills="+ textField3.getText() +"&salary="+ textField5.getText() +"&deadline=" + textField4.getText();
-                    URL url = new URL(endpoint);
+                    String title = URLEncoder.encode(textField1.getText(), "UTF-8");
+            String description = URLEncoder.encode(textField2.getText(), "UTF-8");
+            String skills = URLEncoder.encode(textField3.getText(), "UTF-8");
+            String salary = URLEncoder.encode(textField5.getText(), "UTF-8");
+            String deadline = URLEncoder.encode(textField4.getText(), "UTF-8");
+            
+            // Construct the encoded URL
+            String urlString = String.format("http://localhost:8080/ansh_singhal/job?title=%s&description=%s&skills=%s&salary=%s&deadline=%s",
+                                              title, description, skills, salary, deadline);
+                    // String endpoint = "http://localhost:8080/ansh_singhal/job?title="+textField1.getText()+"&description="+textField2.getText()+"&skills="+textField3.getText()+"&salary="+textField5.getText()+"&deadline="+textField4.getText();
+                    String endpoint = "http://localhost:8080/ansh_singhal/job?title=Hackathon Team Member&description=We need a team member for our team in Smart India Hackathon 2024.&skills=React JS, Django&salary=There is a prize pool of 1 Lac.&deadline=1 week";
+                    URL url = new URL(urlString);
 
                     // 2. Open the connection
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -108,9 +132,18 @@ public class NewReq extends JFrame {
                         // Read response using InputStream from connection
                     } else {
                         // Handle error
+                        try (BufferedReader in = new BufferedReader(
+                            new InputStreamReader(connection.getInputStream()))) {
+                        String inputLine;
+                        StringBuilder response = new StringBuilder();
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        JSONArray jsonResponse = new JSONArray(response.toString());
+                        System.out.println(jsonResponse.toString());
                     }
 
-                } catch (Exception ex) {
+                }} catch (Exception ex) {
                     // Handle exceptions (e.g., network errors)
                     ex.printStackTrace();
                 }
@@ -119,6 +152,10 @@ public class NewReq extends JFrame {
                 if (window != null) {
                     window.dispose();
                 }
+                if (prevWindow != null) {
+                    prevWindow.dispose();
+                }
+                new HomeWindowIsLoginClient(username);
                 // Main.main(null);
             }
         });

@@ -31,7 +31,7 @@ import org.json.JSONObject;
 
 public class HomeWindowIsLoginTalent extends JFrame {
 
-    private final String username;
+    String username;
 
     HomeWindowIsLoginTalent(String username) {
         this.username = username;
@@ -47,7 +47,7 @@ public class HomeWindowIsLoginTalent extends JFrame {
 
         // navbar
         JPanel navbar = new JPanel();
-        navbar.setBackground(Color.GRAY);
+        navbar.setBackground(new Color(0, 0, 77));
         navbar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton postReq = new JButton("Post a Requirement");
         // JButton talentLogin = new JButton("Login as a Talent");
@@ -66,7 +66,7 @@ public class HomeWindowIsLoginTalent extends JFrame {
                 // if (window != null) {
                 // window.dispose();
                 // }
-                new NewReq();
+                // new NewReq();
             }
         });
 
@@ -104,19 +104,27 @@ public class HomeWindowIsLoginTalent extends JFrame {
                             // JTextArea textArea = new JTextArea(response.toString());
                             // JScrollPane scrollPane = new JScrollPane(textArea);
                             // JOptionPane.showMessageDialog(null, scrollPane);
-
+                            Window window = SwingUtilities.getWindowAncestor(profile);
                             JSONObject jsonResponse = new JSONObject(response.toString());
-                            name = jsonResponse.getString("name");
+                            System.out.println(jsonResponse.toString());
+                            if (jsonResponse.has("error")) {
+                                new CreateProfileTalent((JFrame) window);
+                            } else {
+                                // String name = jsonResponse.getString("name"
                             age = jsonResponse.getInt("age");
                             bio = jsonResponse.getString("bio");
                             skills = jsonResponse.getString("skills");
                             experience = jsonResponse.getString("experience");
+                            name = jsonResponse.getString("name");
                             
-                            System.out.println("Name: " + name);
                             System.out.println("Age: " + age);
                             System.out.println("Bio: " + bio);
                             System.out.println("Skills: " + skills);
                             System.out.println("Experience: " + experience);
+                            System.out.println("Name: " + name);
+                            Window window1 = SwingUtilities.getWindowAncestor(profile);
+                            new TalentProfileWindow((JFrame) window1, name, age, bio, skills, experience);
+                            }
                         }
                     } else {
                         // Handle error
@@ -130,11 +138,11 @@ public class HomeWindowIsLoginTalent extends JFrame {
                 // if (window != null) {
                 // window.dispose();
                 // }
-                if (false) {
-                    new CreateProfileTalent();
-                } else {
-                    new TalentProfileWindow((JFrame) window, name, age, bio, skills, experience);
-                }
+                // if (false) {
+                //     new CreateProfileTalent();
+                // } else {
+                //     new TalentProfileWindow((JFrame) window, name, age, bio, skills, experience);
+                // }
             }
         });
 

@@ -103,6 +103,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
             companyData.put("name", result.getString("name"));
             companyData.put("description", result.getString("description"));
             companyData.put("website", result.getString("website"));
+            companyData.put("password", result.getString("password"));
             // ... Add other relevant columns
 
             out.println(companyData.toString()); 

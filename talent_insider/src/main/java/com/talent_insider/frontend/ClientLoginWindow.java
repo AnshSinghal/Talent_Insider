@@ -111,18 +111,23 @@ public class ClientLoginWindow extends JFrame{
                             // JOptionPane.showMessageDialog(null, scrollPane);
 
                             JSONObject jsonResponse = new JSONObject(response.toString());
-                            name = jsonResponse.getString("name");
-                            email = jsonResponse.getString("email");
                             description = jsonResponse.getString("description");
                             website = jsonResponse.getString("website");
                             password = jsonResponse.getString("password");
+                            name = jsonResponse.getString("name");
+                            email = jsonResponse.getString("email");
 
                             System.out.println(jsonResponse);
                             
-                            System.out.println("Name: " + name);
                             System.out.println("Email: " + email);
                             System.out.println("Description: " + description);
                             System.out.println("Website: " + website);
+                            System.out.println("Name: " + name);
+                            Window window = SwingUtilities.getWindowAncestor(loginButton);
+                            if (window != null) {
+                                window.dispose();
+                            }
+                            // new HomeWindowIsLoginClient(userNameField.getText());
 
                         }
                     } else {
@@ -132,13 +137,41 @@ public class ClientLoginWindow extends JFrame{
                         JLabel errorLabel = new JLabel("Invalid Username or Password");
                         errorPanel.add(errorLabel);
                         errorFrame.add(errorPanel, BorderLayout.SOUTH);
-                        errorFrame.setSize(200, 200);
+                        errorFrame.setSize(200, 400);
                         errorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         errorFrame.setVisible(true);
                         System.out.println("Request failed. Response Code: " + responseCode);
+                        new Main();
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    JFrame errorFrame = new JFrame();
+                        JPanel errorPanel = new JPanel();
+                        JLabel errorLabel = new JLabel("Invalid Username or Password");
+                        JButton errorButton = new JButton("Try Again");
+                        errorPanel.add(errorLabel);
+                        errorFrame.add(errorButton, BorderLayout.SOUTH);
+                        errorFrame.setSize(200, 400);
+                        errorButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Window window = SwingUtilities.getWindowAncestor(errorButton);
+                                if (window != null) {
+                                    window.dispose();
+                                }
+                                new ClientLoginWindow();
+                            }
+                        });
+                        errorFrame.add(errorPanel, BorderLayout.NORTH);
+                        errorFrame.setSize(200, 200);
+                        errorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        errorFrame.setVisible(true);
+                        Window window = SwingUtilities.getWindowAncestor(loginButton);
+                        if (window != null) {
+                            window.dispose();
+                        }
+                        new Main();
+                        // System.out.println("Request failed. Response Code: " + responseCode);
                 }
 
                 Window window = SwingUtilities.getWindowAncestor(loginButton);
@@ -150,10 +183,11 @@ public class ClientLoginWindow extends JFrame{
                     if (window1 != null) {
                         window1.dispose();
                     }
-                    new ClientLoginWindow();
-                } else {
                     new HomeWindowIsLoginClient(userNameField.getText());
-                }
+                } 
+                // else {
+                //     new HomeWindowIsLoginClient(userNameField.getText());
+                // }
             }
         });
 
