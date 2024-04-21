@@ -103,47 +103,66 @@ public class NewReq extends JFrame {
             String deadline = URLEncoder.encode(textField4.getText(), "UTF-8");
             
             // Construct the encoded URL
-            String urlString = String.format("http://localhost:8080/ansh_singhal/job?title=%s&description=%s&skills=%s&salary=%s&deadline=%s",
+            String urlString1 = String.format("http://localhost:8080/ansh_singhal/job?title=%s&description=%s&skills=%s&salary=%s&deadline=%s",
                                               title, description, skills, salary, deadline);
+                    String urlString2 = String.format("http://localhost:8080/ansh_singhal/jobApp?tableName=%s",title);
                     // String endpoint = "http://localhost:8080/ansh_singhal/job?title="+textField1.getText()+"&description="+textField2.getText()+"&skills="+textField3.getText()+"&salary="+textField5.getText()+"&deadline="+textField4.getText();
                     String endpoint = "http://localhost:8080/ansh_singhal/job?title=Hackathon Team Member&description=We need a team member for our team in Smart India Hackathon 2024.&skills=React JS, Django&salary=There is a prize pool of 1 Lac.&deadline=1 week";
-                    URL url = new URL(urlString);
-
+                    URL url1 = new URL(urlString1);
+                    URL url2 = new URL(urlString2);
                     // 2. Open the connection
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("POST");
-                    connection.setDoOutput(true); // Enable sending a request body
-
+                    HttpURLConnection connection1 = (HttpURLConnection) url1.openConnection();
+                    connection1.setRequestMethod("POST");
+                    connection1.setDoOutput(true); // Enable sending a request body
+                    HttpURLConnection connection2 = (HttpURLConnection) url2.openConnection();
+                    connection2.setRequestMethod("POST");
+                    connection2.setDoOutput(true); // Enable sending a request body
                     // 3. Set headers (if needed)
-                    connection.setRequestProperty("Content-Type", "application/json");
-
+                    connection1.setRequestProperty("Content-Type", "application/json");
+                    connection2.setRequestProperty("Content-Type", "application/json");
                     // 4. Prepare the request body (if needed)
                     String postData = "{ \"key1\": \"value1\", \"key2\": \"value2\" }"; // Example JSON
-                    try (OutputStream os = connection.getOutputStream()) {
+                    try (OutputStream os = connection1.getOutputStream()) {
+                        os.write(postData.getBytes());
+                    }
+                    try (OutputStream os = connection2.getOutputStream()) {
                         os.write(postData.getBytes());
                     }
 
                     // 5. Get the response code
-                    int responseCode = connection.getResponseCode();
-                    System.out.println("Response Code: " + responseCode);
-
+                    int responseCode1 = connection1.getResponseCode();
+                    int responseCode2 = connection2.getResponseCode();
+                    System.out.println("Job Posted Response Code: " + responseCode1);
+                    System.out.println("Table Created Response Code: " + responseCode2);
                     // 6. Process the response (if needed)
-                    if (responseCode == 200 || responseCode == 201) { // Success codes
+                    if (responseCode2 == 200 || responseCode2 == 201) { // Success codes
                         // Read response using InputStream from connection
                     } else {
                         // Handle error
-                        try (BufferedReader in = new BufferedReader(
-                            new InputStreamReader(connection.getInputStream()))) {
-                        String inputLine;
-                        StringBuilder response = new StringBuilder();
-                        while ((inputLine = in.readLine()) != null) {
-                            response.append(inputLine);
+                        // try (BufferedReader in = new BufferedReader(
+                        //     new InputStreamReader(connection1.getInputStream()))) {
+                        // String inputLine;
+                        // StringBuilder response = new StringBuilder();
+                        // while ((inputLine = in.readLine()) != null) {
+                        //     response.append(inputLine);
+                        // }
+                        // JSONArray jsonResponse = new JSONArray(response.toString());
+                        // System.out.println(jsonResponse.toString());
+        
+                        try (BufferedReader in2 = new BufferedReader(
+                            new InputStreamReader(connection2.getInputStream()))) {
+                        String inputLine2;
+                        StringBuilder response2 = new StringBuilder();
+                        while ((inputLine2 = in2.readLine()) != null) {
+                            response2.append(inputLine2);
                         }
-                        JSONArray jsonResponse = new JSONArray(response.toString());
-                        System.out.println(jsonResponse.toString());
+                        JSONArray jsonResponse2 = new JSONArray(response2.toString());
+                        System.out.println(jsonResponse2.toString());
                     }
 
-                }} catch (Exception ex) {
+                }
+            // }
+        } catch (Exception ex) {
                     // Handle exceptions (e.g., network errors)
                     ex.printStackTrace();
                 }

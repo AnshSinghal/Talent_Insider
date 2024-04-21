@@ -6,6 +6,7 @@ com\talent_insider\frontend\GigsPanel.class
 com\talent_insider\frontend\NewReq$1.class
 com\talent_insider\frontend\SignupTalent$1.class
 com\talent_insider\frontend\TalentProfileWindow$1.class
+com\talent_insider\jobDataServlet.class
 com\talent_insider\frontend\Main$3.class
 com\talent_insider\frontend\TalentProfileWindow.class
 com\talent_insider\frontend\Main.class
@@ -31,6 +32,7 @@ com\talent_insider\frontend\GigWindow$1.class
 com\talent_insider\frontend\TalentLoginWindow$1$1.class
 com\talent_insider\frontend\Main$2.class
 com\talent_insider\frontend\GigWindow.class
+com\talent_insider\jobApplicationServlet.class
 com\talent_insider\frontend\ClientLoginWindow$1.class
 com\talent_insider\frontend\SignupClient$1.class
 com\talent_insider\companySignupServlet.class
