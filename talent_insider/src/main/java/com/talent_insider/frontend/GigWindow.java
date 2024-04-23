@@ -2,6 +2,7 @@ package com.talent_insider.frontend;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+// import java.awt.List;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,12 +10,13 @@ import java.io.UnsupportedEncodingException;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-// import java.StringBuilder;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -98,43 +100,53 @@ public class GigWindow extends JFrame {
         // Apply Button
         final JButton applyButton = new JButton("Apply");
         if (isTalent) applyButtonPanel.add(applyButton);
-        JPanel applicantsPanel = new JPanel();
-        // applicantsPanel.setLayout(new GridLayout(7, 1));
-        JLabel applicantsLabel = new JLabel("Applicants: ");
-        applicantsPanel.add(applicantsLabel);
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JLabel nameLabel = new JLabel("Name: ");
-            JLabel numberLabel = new JLabel("Number: ");
-            JLabel emailLabel = new JLabel("Email: ");
-            JLabel ageLabel = new JLabel("Age: ");
-            JLabel bioLabel = new JLabel("Bio: ");
-            JLabel skillsLabel2 = new JLabel("Skills: ");
-            JLabel experienceLabel = new JLabel("Experience: ");
-            nameLabel.setText(nameLabel.getText() + jsonArray.getJSONObject(i).getString("name") + ", ");
-            numberLabel.setText(numberLabel.getText() + jsonArray.getJSONObject(i).getString("number") + ", ");
-            emailLabel.setText(emailLabel.getText() + jsonArray.getJSONObject(i).getString("email") + ", ");
-            ageLabel.setText(ageLabel.getText() + jsonArray.getJSONObject(i).getString("age") + ", ");
-            bioLabel.setText(bioLabel.getText() + jsonArray.getJSONObject(i).getString("bio") + ", ");
-            skillsLabel2.setText(skillsLabel.getText() + jsonArray.getJSONObject(i).getString("skills") + ", ");
-            experienceLabel.setText(experienceLabel.getText() + jsonArray.getJSONObject(i).getString("experience") + ", ");
+        // JPanel applicantsPanel = new JPanel();
+        // // applicantsPanel.setLayout(new GridLayout(7, 1));
+        // JLabel applicantsLabel = new JLabel("Applicants: ");
+        // applicantsPanel.add(applicantsLabel);
+        // for (int i = 0; i < jsonArray.length(); i++) {
+        //     JLabel nameLabel = new JLabel("Name: ");
+        //     JLabel numberLabel = new JLabel("Number: ");
+        //     JLabel emailLabel = new JLabel("Email: ");
+        //     JLabel ageLabel = new JLabel("Age: ");
+        //     JLabel bioLabel = new JLabel("Bio: ");
+        //     JLabel skillsLabel2 = new JLabel("Skills: ");
+        //     JLabel experienceLabel = new JLabel("Experience: ");
+        //     nameLabel.setText(nameLabel.getText() + jsonArray.getJSONObject(i).getString("name") + ", ");
+        //     numberLabel.setText(numberLabel.getText() + jsonArray.getJSONObject(i).getString("number") + ", ");
+        //     emailLabel.setText(emailLabel.getText() + jsonArray.getJSONObject(i).getString("email") + ", ");
+        //     ageLabel.setText(ageLabel.getText() + jsonArray.getJSONObject(i).getString("age") + ", ");
+        //     bioLabel.setText(bioLabel.getText() + jsonArray.getJSONObject(i).getString("bio") + ", ");
+        //     skillsLabel2.setText(skillsLabel.getText() + jsonArray.getJSONObject(i).getString("skills") + ", ");
+        //     experienceLabel.setText(experienceLabel.getText() + jsonArray.getJSONObject(i).getString("experience") + ", ");
 
-            applicantsLabel.setFont(new Font("Arial", Font.BOLD, 18));
-            nameLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-            numberLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-            emailLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-            ageLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-            bioLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-            skillsLabel2.setFont(new Font("Arial", Font.PLAIN, 15));
-            experienceLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        //     applicantsLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        //     nameLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        //     numberLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        //     emailLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        //     ageLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        //     bioLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        //     skillsLabel2.setFont(new Font("Arial", Font.PLAIN, 15));
+        //     experienceLabel.setFont(new Font("Arial", Font.PLAIN, 15));
             
-            applicantsPanel.add(nameLabel);
-            applicantsPanel.add(numberLabel);
-            applicantsPanel.add(emailLabel);
-            applicantsPanel.add(ageLabel);
-            applicantsPanel.add(bioLabel);
-            applicantsPanel.add(skillsLabel2);
-            applicantsPanel.add(experienceLabel);
-            if (isClient) detailsPanel.add(applicantsPanel, BorderLayout.SOUTH);
+        //     applicantsPanel.add(nameLabel);
+        //     applicantsPanel.add(numberLabel);
+        //     applicantsPanel.add(emailLabel);
+        //     applicantsPanel.add(ageLabel);
+        //     applicantsPanel.add(bioLabel);
+        //     applicantsPanel.add(skillsLabel2);
+        //     applicantsPanel.add(experienceLabel);
+        //     if (isClient) detailsPanel.add(applicantsPanel, BorderLayout.SOUTH);
+        // }
+
+        List<ApplicantPanel> applicants = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            ApplicantPanel applicantPanel = new ApplicantPanel(new Applicant(jsonArray.getJSONObject(i).getString("name"), jsonArray.getJSONObject(i).getString("number"), jsonArray.getJSONObject(i).getString("email"), jsonArray.getJSONObject(i).getString("age"), jsonArray.getJSONObject(i).getString("skills"), jsonArray.getJSONObject(i).getString("bio"), jsonArray.getJSONObject(i).getString("experience")));
+            applicants.add(applicantPanel);
+        }
+
+        for (ApplicantPanel applicantPanel : applicants) {
+            detailsPanel.add(applicantPanel);
         }
 
         applyButton.addActionListener(new ActionListener() {
