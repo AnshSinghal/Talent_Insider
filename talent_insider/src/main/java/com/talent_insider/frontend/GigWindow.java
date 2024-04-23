@@ -2,11 +2,9 @@ package com.talent_insider.frontend;
 
 import java.awt.Font;
 import java.awt.GridLayout;
-// import java.awt.List;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.UnsupportedEncodingException;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.net.URLEncoder;
@@ -87,7 +85,7 @@ public class GigWindow extends JFrame {
         // Comments Label
         JLabel commentsLabel = new JLabel("Add some comments:");
         commentsLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        detailsPanel.add(commentsLabel);
+        if (isTalent) detailsPanel.add(commentsLabel);
 
         // Comments Text Area
         JTextArea commentsTextArea = new JTextArea();
@@ -138,18 +136,19 @@ public class GigWindow extends JFrame {
         //     applicantsPanel.add(experienceLabel);
         //     if (isClient) detailsPanel.add(applicantsPanel, BorderLayout.SOUTH);
         // }
+        if (isClient) {
+            List<ApplicantPanel> applicants = new ArrayList<>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                ApplicantPanel applicantPanel = new ApplicantPanel(new Applicant(jsonArray.getJSONObject(i).getString("name"), jsonArray.getJSONObject(i).getString("number"), jsonArray.getJSONObject(i).getString("email"), jsonArray.getJSONObject(i).getString("age"), jsonArray.getJSONObject(i).getString("skills"), jsonArray.getJSONObject(i).getString("bio"), jsonArray.getJSONObject(i).getString("experience")));
+                applicants.add(applicantPanel);
+            }
 
-        List<ApplicantPanel> applicants = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            ApplicantPanel applicantPanel = new ApplicantPanel(new Applicant(jsonArray.getJSONObject(i).getString("name"), jsonArray.getJSONObject(i).getString("number"), jsonArray.getJSONObject(i).getString("email"), jsonArray.getJSONObject(i).getString("age"), jsonArray.getJSONObject(i).getString("skills"), jsonArray.getJSONObject(i).getString("bio"), jsonArray.getJSONObject(i).getString("experience")));
-            applicants.add(applicantPanel);
+            for (ApplicantPanel applicantPanel : applicants) {
+                detailsPanel.add(applicantPanel);
+            }
         }
-
-        for (ApplicantPanel applicantPanel : applicants) {
-            detailsPanel.add(applicantPanel);
-        }
-
         applyButton.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {

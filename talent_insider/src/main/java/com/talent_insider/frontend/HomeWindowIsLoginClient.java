@@ -70,6 +70,7 @@ public class HomeWindowIsLoginClient extends JFrame{
         });
 
         profile.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void actionPerformed(ActionEvent e) {
 

@@ -86,6 +86,7 @@ public class NewReq extends JFrame {
         final JButton submitButton = new JButton("Submit");
 
         submitButton.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println(textField1.getText());
@@ -107,7 +108,7 @@ public class NewReq extends JFrame {
                                               title, description, skills, salary, deadline);
                     String urlString2 = String.format("http://localhost:8080/ansh_singhal/jobApp?tableName=%s",title);
                     // String endpoint = "http://localhost:8080/ansh_singhal/job?title="+textField1.getText()+"&description="+textField2.getText()+"&skills="+textField3.getText()+"&salary="+textField5.getText()+"&deadline="+textField4.getText();
-                    String endpoint = "http://localhost:8080/ansh_singhal/job?title=Hackathon Team Member&description=We need a team member for our team in Smart India Hackathon 2024.&skills=React JS, Django&salary=There is a prize pool of 1 Lac.&deadline=1 week";
+                    // String endpoint = "http://localhost:8080/ansh_singhal/job?title=Hackathon Team Member&description=We need a team member for our team in Smart India Hackathon 2024.&skills=React JS, Django&salary=There is a prize pool of 1 Lac.&deadline=1 week";
                     URL url1 = new URL(urlString1);
                     URL url2 = new URL(urlString2);
                     // 2. Open the connection

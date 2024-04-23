@@ -21,10 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import org.json.JSONObject;
@@ -73,6 +70,7 @@ public class HomeWindowIsLoginTalent extends JFrame {
         });
 
         profile.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void actionPerformed(ActionEvent e) {
                 name = "";
@@ -136,7 +134,7 @@ public class HomeWindowIsLoginTalent extends JFrame {
                     ex.printStackTrace();
                 }
 
-                Window window = SwingUtilities.getWindowAncestor(profile);
+                // Window window = SwingUtilities.getWindowAncestor(profile);
                 // if (window != null) {
                 // window.dispose();
                 // }

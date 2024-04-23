@@ -65,6 +65,7 @@ public class SignupTalent extends JFrame{
         loginButtonPanel.add(loginButton);
 
         loginButton.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Login Button Clicked");

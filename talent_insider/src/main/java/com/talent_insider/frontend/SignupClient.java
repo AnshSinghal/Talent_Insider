@@ -71,6 +71,7 @@ public class SignupClient extends JFrame{
         loginButtonPanel.add(loginButton);
 
         loginButton.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void actionPerformed(ActionEvent e) {
 

@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ApplicantPanel extends JPanel{
+    @SuppressWarnings("unused")
     private Applicant applicant;
     public ApplicantPanel(Applicant applicant) {
         this.applicant = applicant;

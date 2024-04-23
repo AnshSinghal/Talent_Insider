@@ -15,9 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-
-import com.mysql.cj.xdevapi.JsonArray;
 
 import java.io.BufferedReader;
 import java.net.URLEncoder;
@@ -56,6 +53,7 @@ public class GigsPanel extends JPanel {
     private void addButton() {
         JButton button = new JButton("View More");
         button.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void actionPerformed(ActionEvent e) {
                 

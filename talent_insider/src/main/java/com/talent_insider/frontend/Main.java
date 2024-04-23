@@ -25,9 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-import com.mysql.cj.xdevapi.JsonArray;
 
 public class Main {
 
@@ -134,6 +132,7 @@ public class Main {
         frame.add(mainPanel);
     }
 
+    @SuppressWarnings("deprecation")
     public static JSONArray getGigs(){
         try {
                     // 1. Prepare the URL

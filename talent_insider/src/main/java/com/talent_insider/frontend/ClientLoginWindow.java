@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -43,7 +44,7 @@ public class ClientLoginWindow extends JFrame{
         // Password
         JPanel passwordPanel = new JPanel();
         JLabel passwordLabel = new JLabel("Password: ");
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         passwordField.setColumns(20);
         passwordPanel.add(passwordLabel);
         passwordPanel.add(passwordField);
@@ -74,6 +75,7 @@ public class ClientLoginWindow extends JFrame{
         loginButtonPanel.add(loginButton);
 
         loginButton.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void actionPerformed(ActionEvent e) {
 
