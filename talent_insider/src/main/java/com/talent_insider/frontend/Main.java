@@ -108,7 +108,7 @@ public class Main {
         List<GigsPanel> gigPanels = new ArrayList<>();
         for (int i = 0; i < getGigs().length(); i++) {
             GigsPanel gigPanel = new GigsPanel(new Gig(getGigs().getJSONObject(i).getString("title"), getGigs().getJSONObject(i).getString("description"), getGigs().getJSONObject(i).getString("skills"),
-                    getGigs().getJSONObject(i).getString("deadline"), getGigs().getJSONObject(i).getString("salary")));
+                    getGigs().getJSONObject(i).getString("deadline"), getGigs().getJSONObject(i).getString("salary")), false, false, "", "");
                     // gigPanel.setBackground(Color.BLUE);
                     gigPanels.add(gigPanel);
         }

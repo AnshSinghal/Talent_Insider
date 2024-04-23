@@ -131,7 +131,7 @@ public class TalentLoginWindow extends JFrame {
                                 }
                                 window.dispose();
                                 System.out.println(name);
-                                new HomeWindowIsLoginTalent(name);
+                                new HomeWindowIsLoginTalent(name, username);
                             } else {
                                 JFrame errorFrame = new JFrame();
                         JPanel errorPanel = new JPanel();

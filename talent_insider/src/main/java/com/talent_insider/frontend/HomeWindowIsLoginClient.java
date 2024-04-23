@@ -181,7 +181,7 @@ public class HomeWindowIsLoginClient extends JFrame{
         List<GigsPanel> gigPanels = new ArrayList<>();
         for (int i = 0; i < Main.getGigs().length(); i++) {
             GigsPanel gigPanel = new GigsPanel(new Gig(Main.getGigs().getJSONObject(i).getString("title"), Main.getGigs().getJSONObject(i).getString("description"), Main.getGigs().getJSONObject(i).getString("skills"),
-                    Main.getGigs().getJSONObject(i).getString("deadline"), Main.getGigs().getJSONObject(i).getString("salary")));
+                    Main.getGigs().getJSONObject(i).getString("deadline"), Main.getGigs().getJSONObject(i).getString("salary")), true, false, "", "");
             gigPanels.add(gigPanel);
         }
 

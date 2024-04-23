@@ -100,7 +100,7 @@ public class CreateProfileTalent extends JFrame{
                             window.dispose();
                         }
                         prevWindow.dispose();
-                        new HomeWindowIsLoginTalent(nameField.getText());
+                        new HomeWindowIsLoginTalent(nameField.getText(),"");
                     } else {
                         // Handle error
                     }

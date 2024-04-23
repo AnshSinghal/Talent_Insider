@@ -11,6 +11,17 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.mysql.cj.xdevapi.JsonArray;
+
+import java.io.BufferedReader;
+import java.net.URLEncoder;
+import java.io.InputStreamReader;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,9 +30,16 @@ import javax.swing.border.Border;
 
 public class GigsPanel extends JPanel {
     private Gig gig;
-
-    public GigsPanel(Gig gig) {
+    boolean showViewMore;
+    boolean showApply;
+    String username;
+    String name;
+    public GigsPanel(Gig gig, boolean showViewMore, boolean showApply, String username, String name) {
+        this.username = username;
+        this.name = name;
         this.gig = gig;
+        this.showViewMore = showViewMore;
+        this.showApply = showApply;
         // setBackground(Color.BLUE);
         setLayout(new GridBagLayout());
         setBorder(new RoundedBorder(16));
@@ -32,7 +50,7 @@ public class GigsPanel extends JPanel {
         addSkillsLabel();
         addTimeExpectedLabel();
         addPaymentAmountLabel();
-        addButton();
+        if (showViewMore) addButton();
     }
 
     private void addButton() {
@@ -40,7 +58,68 @@ public class GigsPanel extends JPanel {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GigWindow(gig);
+                
+                // String name = "";
+                // String number = "";
+                // String email = "";
+                // String age = "";
+                // String bio = "";
+                // String skills = "";
+                // String experience = "";
+
+                try {
+                    // 1. Prepare the URL
+                    String tableName = URLEncoder.encode(gig.getTitle(), "UTF-8");
+                    // String endpoint = String.format("http://localhost:8080/ansh_singhal/jobData?tableName=%s",tableName);
+                    String endpoint = "http://localhost:8080/ansh_singhal/jobDatas?tableName=" + tableName;
+                    URL url = new URL(endpoint);
+                    System.out.println("URL: " + url);
+                    System.out.println("Endpoint: " + endpoint);
+                    // 2. Open the connection
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    // 3. Get the response code
+                    int responseCode = connection.getResponseCode();
+                    System.out.println("Response Code: " + responseCode);
+
+                    // 4. Process the response
+                    if (responseCode == 200) { // Success
+                        try (BufferedReader in = new BufferedReader(
+                                new InputStreamReader(connection.getInputStream()))) {
+                            String inputLine;
+                            StringBuilder response = new StringBuilder();
+                            while ((inputLine = in.readLine()) != null) {
+                                response.append(inputLine);
+                            }
+                            // Process the response (Example: Display in a JTextArea)
+                            // JTextArea textArea = new JTextArea(response.toString());
+                            // JScrollPane scrollPane = new JScrollPane(textArea);
+                            // JOptionPane.showMessageDialog(null, scrollPane);
+
+                          
+                            JSONArray jsonResponse = new JSONArray(response.toString());
+                            System.out.println(jsonResponse.toString());
+                            new GigWindow(gig, showApply, username, name, true, jsonResponse);
+                        }
+                    } else {
+                        // Handle error
+                        System.out.println("Request failed. Response Code: " + responseCode);
+                        // Handle error
+                        try (BufferedReader in = new BufferedReader(
+                            new InputStreamReader(connection.getInputStream()))) {
+                        String inputLine;
+                        StringBuilder response = new StringBuilder();
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        JSONArray jsonResponse = new JSONArray(response.toString());
+                        System.out.println(jsonResponse.toString());
+                    }}
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
             }
         });
         GridBagConstraints gbc = new GridBagConstraints();

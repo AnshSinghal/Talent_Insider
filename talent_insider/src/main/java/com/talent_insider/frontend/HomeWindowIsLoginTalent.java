@@ -31,10 +31,12 @@ import org.json.JSONObject;
 
 public class HomeWindowIsLoginTalent extends JFrame {
 
-    String username;
-
-    HomeWindowIsLoginTalent(String username) {
-        this.username = username;
+    String userrname;
+    String applyUsername;
+    String name;
+    HomeWindowIsLoginTalent(String userrname, String applyUsername) {
+        this.applyUsername = applyUsername;
+        this.userrname = userrname;
         this.setVisible(true);
         this.setTitle("Talent Insider");
         this.setSize(500, 500);
@@ -73,14 +75,14 @@ public class HomeWindowIsLoginTalent extends JFrame {
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String name = "";
+                name = "";
                 int age = 0;
                 String bio = "";
                 String skills = "";
                 String experience = "";
                 try {
                     // 1. Prepare the URL
-                    String endpoint = "http://localhost:8080/ansh_singhal/userProfile?name="+ username +"&age=&bio=&skills=&experience=";
+                    String endpoint = "http://localhost:8080/ansh_singhal/userProfile?name="+ userrname +"&age=&bio=&skills=&experience=";
                     URL url = new URL(endpoint);
 
                     // 2. Open the connection
@@ -170,7 +172,7 @@ public class HomeWindowIsLoginTalent extends JFrame {
         List<GigsPanel> gigPanels = new ArrayList<>();
         for (int i = 0; i < Main.getGigs().length(); i++) {
             GigsPanel gigPanel = new GigsPanel(new Gig(Main.getGigs().getJSONObject(i).getString("title"), Main.getGigs().getJSONObject(i).getString("description"), Main.getGigs().getJSONObject(i).getString("skills"),
-                    Main.getGigs().getJSONObject(i).getString("deadline"), Main.getGigs().getJSONObject(i).getString("salary")));
+                    Main.getGigs().getJSONObject(i).getString("deadline"), Main.getGigs().getJSONObject(i).getString("salary")), true, true, applyUsername, userrname);
             gigPanels.add(gigPanel);
         }
 

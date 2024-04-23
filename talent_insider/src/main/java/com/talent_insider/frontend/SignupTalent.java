@@ -15,23 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.sql.PreparedStatement;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class SignupTalent extends JFrame{
     SignupTalent(){
@@ -133,7 +117,7 @@ public class SignupTalent extends JFrame{
                 if (window != null) {
                     window.dispose();
                 }
-                new HomeWindowIsLoginTalent(userNameField.getText());
+                new HomeWindowIsLoginTalent(userNameField.getText(), nameField.getText());
             }
         });
 

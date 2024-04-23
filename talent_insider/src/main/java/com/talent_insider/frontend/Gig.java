@@ -17,6 +17,9 @@ public class Gig {
     public String getJobTitle() {
         return "Title: " + jobTitle;
     }
+    public String getTitle() {
+        return jobTitle;
+    }
     public String getDescription() {
         return "Description: " + description;
     }
